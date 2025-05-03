@@ -20,6 +20,8 @@ Bu portfolyo web sitesi React ve Vite kullanılarak geliştirilmiştir.
 Site GitHub Pages üzerinde yayınlanmaktadır:
 https://ibrahimglmz.github.io/my_web/
 
+Son deployment tarihi: 3 Mayıs 2024
+
 ## Geliştirme
 
 Projeyi lokalde çalıştırmak için:
