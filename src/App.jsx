@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
+import profileImage from './assets/ibrahim.jpg'
 
 // Lazy loading ile komponentleri yükle
 const Experience = lazy(() => import('./components/Experience'))
@@ -131,7 +132,7 @@ function App() {
                     transition={{ duration: 0.8 }}
                   >
                     <img 
-                      src="/ibrahim.jpg" 
+                      src={profileImage}
                       alt="İbrahim Gülmez"
                       loading="lazy"
                       width="300"
