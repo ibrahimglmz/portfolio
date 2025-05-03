@@ -2,5 +2,8 @@
   "dependencies": {
     "framer-motion": "^12.9.4",
     "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "terser": "^5.39.0"
   }
 }
