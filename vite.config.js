@@ -1,28 +1,30 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import compression from 'vite-plugin-compression'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+    }),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+    }),
+  ],
   base: '/',
   build: {
     // Chunk boyutunu optimize et
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          // React ve React DOM'u vendor chunk'a ayır
-          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
-            return 'vendor-react'
-          }
-          // Framer Motion'ı ayrı chunk'a ayır
-          if (id.includes('node_modules/framer-motion/')) {
-            return 'vendor-animations'
-          }
-          // Diğer node_modules paketlerini ayrı chunk'a ayır
-          if (id.includes('node_modules/')) {
-            return 'vendor-others'
-          }
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-animations': ['framer-motion'],
+          'vendor-router': ['react-router-dom'],
         }
       }
     },
@@ -55,5 +57,13 @@ export default defineConfig({
     hmr: {
       overlay: false
     }
+  },
+  preview: {
+    port: 3000,
+    host: true
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion', 'react-router-dom'],
+    exclude: ['@vercel/analytics']
   }
 })
