@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from 'react'
 import './App.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 // Lazy loading ile komponentleri yükle
 const Experience = lazy(() => import('./components/Experience'))
@@ -230,6 +231,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <SpeedInsights />
     </>
   )
 }
