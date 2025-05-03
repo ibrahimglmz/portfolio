@@ -15,7 +15,7 @@ export default defineConfig({
       ext: '.br',
     }),
   ],
-  base: './',
+  base: '',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
@@ -51,7 +51,7 @@ export default defineConfig({
       }
     },
     assetsInlineLimit: 4096,
-    sourcemap: process.env.NODE_ENV === 'development',
+    sourcemap: false,
     cssCodeSplit: true,
     cssMinify: true,
     target: 'esnext'
