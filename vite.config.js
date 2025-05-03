@@ -46,21 +46,10 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     cssMinify: true,
-    target: 'esnext',
-    reportCompressedSize: false
+    target: 'esnext'
   },
-  // Cache optimizasyonu
   server: {
-    hmr: {
-      overlay: false
-    }
-  },
-  preview: {
     port: 3000,
-    host: true
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'react-icons'],
-    exclude: ['@vercel/analytics']
+    open: true
   }
 })
