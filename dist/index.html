@@ -19,7 +19,19 @@
     <link rel="manifest" href="/my_web//manifest.json" />
     
     <title>İbrahim Gülmez - Portfolio</title>
-    <script type="module" crossorigin src="/my_web/assets/js/index-57b309c8.js"></script>
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
+    <script type="module" crossorigin src="/my_web/assets/js/index-b2975c5e.js"></script>
     <link rel="modulepreload" crossorigin href="/my_web/assets/js/vendor-react-045009eb.js">
     <link rel="modulepreload" crossorigin href="/my_web/assets/js/vendor-icons-8650e136.js">
     <link rel="modulepreload" crossorigin href="/my_web/assets/js/vendor-animations-660ed15e.js">
