@@ -15,7 +15,7 @@ export default defineConfig({
       ext: '.br',
     }),
   ],
-  base: '/',
+  base: '/my_web/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
