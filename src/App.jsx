@@ -2,6 +2,7 @@ import { useState, lazy, Suspense } from 'react'
 import './App.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { Analytics } from "@vercel/analytics/react"
 import profileImage from './assets/ibrahim.jpg'
@@ -149,6 +150,8 @@ function App() {
               <Suspense fallback={<LoadingSpinner />}>
                 <Experience />
               </Suspense>
+
+              <Footer />
 
               <motion.section 
                 className="projects-section"
