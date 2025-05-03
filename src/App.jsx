@@ -151,8 +151,6 @@ function App() {
                 <Experience />
               </Suspense>
 
-              <Footer />
-
               <motion.section 
                 className="projects-section"
                 variants={staggerContainer}
@@ -236,6 +234,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <Footer />
       <SpeedInsights />
       <Analytics />
     </>

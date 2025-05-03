@@ -15,7 +15,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-section">
           <h3>İbrahim Gülmez</h3>
-          <p>Yazılım Geliştirici & Veri Analisti</p>
+          <p>Yazılım Geliştirici</p>
         </div>
         
         <div className="footer-section">
@@ -27,7 +27,7 @@ const Footer = () => {
             <a href="https://github.com/ibrahimglmz" target="_blank" rel="noopener noreferrer">
               <FaGithub /> GitHub
             </a>
-            <a href="mailto:contact@example.com">
+            <a href="mailto:ibrahiimgulmez@gmail.com">
               <FaEnvelope /> E-posta
             </a>
           </div>
