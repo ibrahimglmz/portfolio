@@ -17,18 +17,19 @@ export default defineConfig({
   ],
   base: '/',
   build: {
-    // Chunk boyutunu optimize et
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
     chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom'],
           'vendor-animations': ['framer-motion'],
-          'vendor-router': ['react-router-dom'],
+          'vendor-icons': ['react-icons']
         }
       }
     },
-    // Build optimizasyonları
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -41,14 +42,10 @@ export default defineConfig({
         toplevel: true
       }
     },
-    // Asset optimizasyonları
     assetsInlineLimit: 4096,
-    // Sourcemap'i production'da devre dışı bırak
     sourcemap: false,
-    // CSS optimizasyonları
     cssCodeSplit: true,
     cssMinify: true,
-    // Performans optimizasyonları
     target: 'esnext',
     reportCompressedSize: false
   },
@@ -63,7 +60,7 @@ export default defineConfig({
     host: true
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'framer-motion', 'react-router-dom'],
+    include: ['react', 'react-dom', 'framer-motion', 'react-icons'],
     exclude: ['@vercel/analytics']
   }
 })
