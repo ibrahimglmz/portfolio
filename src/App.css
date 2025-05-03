@@ -34,19 +34,25 @@ html {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Poppins', sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
   font-size: 16px;
   line-height: 1.5;
-  overflow-x: hidden;
-  width: 100%;
   min-height: 100vh;
+  position: relative;
 }
 
 body::before {
@@ -427,6 +433,7 @@ section {
   padding: 1rem;
   padding-top: 80px;
   overflow-x: hidden;
+  flex: 1;
 }
 
 .hero-section {
@@ -625,12 +632,12 @@ section {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--card-width-desktop), 1fr));
-  gap: 2.5rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  width: 100%;
+  padding: 1rem;
 }
 
 .project-card {
@@ -1045,16 +1052,16 @@ section {
   }
 
   .project-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .project-card p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .tech-tag {
-    font-size: 0.85rem;
-    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
   }
 
   .project-card a {
@@ -1075,11 +1082,12 @@ section {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 0.5rem;
+    margin: 0;
   }
 
   .project-card {
     padding: 1rem;
-    margin: 0 0.5rem;
+    margin: 0;
   }
 
   .project-image {
@@ -1091,8 +1099,7 @@ section {
   }
 
   .tech-stack {
-    gap: 0.5rem;
-    margin: 0.8rem 0;
+    gap: 0.4rem;
   }
 
   .tech-tag {
@@ -1197,7 +1204,6 @@ section {
   }
 
   .projects-grid {
-    gap: 1.2rem;
     padding: 0.3rem;
   }
 
@@ -1626,6 +1632,7 @@ section {
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
+  overflow-x: hidden;
 }
 
 .footer-content {
@@ -1756,4 +1763,6 @@ section {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
