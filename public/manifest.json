@@ -1,21 +1,16 @@
 {
-  "name": "İbrahim Gülmez Portfolio",
-  "short_name": "İG Portfolio",
+  "name": "İbrahim Gülmez - Portfolio",
+  "short_name": "İbrahim Gülmez",
   "description": "İbrahim Gülmez - Kişisel Portfolyo Sitesi",
-  "start_url": "/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "favicon.svg",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/svg+xml"
     }
   ]
 } 
