@@ -27,7 +27,15 @@ export default defineConfig({
           'vendor-react': ['react', 'react-dom'],
           'vendor-animations': ['framer-motion'],
           'vendor-icons': ['react-icons']
-        }
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.css')) {
+            return 'assets/styles/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js'
       }
     },
     minify: 'terser',
@@ -43,7 +51,7 @@ export default defineConfig({
       }
     },
     assetsInlineLimit: 4096,
-    sourcemap: false,
+    sourcemap: process.env.NODE_ENV === 'development',
     cssCodeSplit: true,
     cssMinify: true,
     target: 'esnext'
@@ -51,5 +59,8 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true
+  },
+  preview: {
+    port: 3000
   }
 })
