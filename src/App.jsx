@@ -99,7 +99,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className="app-container" style={{ width: '100%', overflow: 'hidden' }}>
       <div className="animated-shape shape-1"></div>
       <div className="animated-shape shape-2"></div>
       <div className="animated-shape shape-3"></div>
@@ -114,6 +114,7 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            style={{ width: '100%' }}
           >
             <div className="portfolio-container">
               <header className="hero-section">
@@ -237,7 +238,7 @@ function App() {
       <Footer />
       <SpeedInsights />
       <Analytics />
-    </>
+    </div>
   )
 }
 
