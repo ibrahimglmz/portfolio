@@ -198,44 +198,73 @@ function App() {
         ) : (
           <motion.div
             key="contact"
-            className="contact-page"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            className="app-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="contact-container">
-              <h2>İletişim</h2>
-              <div className="contact-cards">
-                <motion.div 
-                  className="contact-card"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+            <div className="contact-page">
+              <div className="contact-container">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <h3>LinkedIn</h3>
-                  <p>Profesyonel profilimi inceleyin</p>
-                  <a href="https://www.linkedin.com/in/ibrahim-gülmez-8bb9501b1/" target="_blank" rel="noopener noreferrer">
-                    LinkedIn Profilim
-                  </a>
-                </motion.div>
-                
+                  İletişim
+                </motion.h2>
                 <motion.div 
-                  className="contact-card"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  className="contact-cards"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.5,
+                    delay: 0.2,
+                    staggerChildren: 0.1
+                  }}
                 >
-                  <h3>E-posta</h3>
-                  <p>Benimle iletişime geçin</p>
-                  <a href="mailto:ibrahiimgulmez@gmail.com">
-                    ibrahiimgulmez@gmail.com
-                  </a>
+                  <motion.div 
+                    className="contact-card glass-effect"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <h3>LinkedIn</h3>
+                    <p>Profesyonel profilimi inceleyin</p>
+                    <motion.a 
+                      href="https://www.linkedin.com/in/ibrahim-gülmez-8bb9501b1/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      LinkedIn Profilim
+                    </motion.a>
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="contact-card glass-effect"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <h3>E-posta</h3>
+                    <p>Benimle iletişime geçin</p>
+                    <motion.a 
+                      href="mailto:ibrahiimgulmez@gmail.com"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      ibrahiimgulmez@gmail.com
+                    </motion.a>
+                  </motion.div>
                 </motion.div>
               </div>
             </div>
+            <Footer />
           </motion.div>
         )}
       </AnimatePresence>
-      <Footer />
       <SpeedInsights />
       <Analytics />
     </div>
