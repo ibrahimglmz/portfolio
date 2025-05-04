@@ -99,172 +99,169 @@ function App() {
   }
 
   return (
-    <div className="app-container" style={{ width: '100%', overflow: 'hidden' }}>
-      <div className="animated-shape shape-1"></div>
-      <div className="animated-shape shape-2"></div>
-      <div className="animated-shape shape-3"></div>
-      
+    <div className="app-container">
       <Navbar showContact={showContact} setShowContact={setShowContact} />
-
       <AnimatePresence mode="wait">
         {!showContact ? (
           <motion.div
-            key="main"
+            key="home"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            style={{ width: '100%' }}
+            className="portfolio-container"
           >
-            <div className="portfolio-container">
-              <header className="hero-section">
-                <div className="hero-content">
+            <div className="animated-shape shape-1"></div>
+            <div className="animated-shape shape-2"></div>
+            <div className="animated-shape shape-3"></div>
+            
+            <header className="hero-section">
+              <div className="hero-content">
+                <motion.div 
+                  className="hero-text"
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <h1>İbrahim Gülmez</h1>
+                </motion.div>
+                <motion.div 
+                  className="hero-image"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <img 
+                    src={profileImage}
+                    alt="İbrahim Gülmez"
+                    loading="lazy"
+                    width="300"
+                    height="300"
+                  />
+                </motion.div>
+              </div>
+            </header>
+
+            <Suspense fallback={<LoadingSpinner />}>
+              <About />
+            </Suspense>
+
+            <Suspense fallback={<LoadingSpinner />}>
+              <Experience />
+            </Suspense>
+
+            <motion.section 
+              className="projects-section"
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+            >
+              <motion.h2 variants={fadeInUp}>
+                Projelerim
+              </motion.h2>
+              <div className="projects-grid">
+                {projects.map((project, index) => (
                   <motion.div 
-                    className="hero-text"
-                    initial={{ opacity: 0, x: -100 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
+                    key={project.name} 
+                    className="project-card"
+                    variants={fadeInUp}
+                    whileHover={{ 
+                      scale: 1.05,
+                      transition: { duration: 0.2 }
+                    }}
                   >
-                    <h1>İbrahim Gülmez</h1>
-                  </motion.div>
-                  <motion.div 
-                    className="hero-image"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8 }}
-                  >
-                    <img 
-                      src={profileImage}
-                      alt="İbrahim Gülmez"
-                      loading="lazy"
-                      width="300"
-                      height="300"
-                    />
-                  </motion.div>
-                </div>
-              </header>
-
-              <Suspense fallback={<LoadingSpinner />}>
-                <About />
-              </Suspense>
-
-              <Suspense fallback={<LoadingSpinner />}>
-                <Experience />
-              </Suspense>
-
-              <motion.section 
-                className="projects-section"
-                variants={staggerContainer}
-                initial="initial"
-                whileInView="animate"
-                viewport={{ once: true }}
-              >
-                <motion.h2 variants={fadeInUp}>
-                  Projelerim
-                </motion.h2>
-                <div className="projects-grid">
-                  {projects.map((project, index) => (
-                    <motion.div 
-                      key={project.name} 
-                      className="project-card"
-                      variants={fadeInUp}
-                      whileHover={{ 
-                        scale: 1.05,
-                        transition: { duration: 0.2 }
-                      }}
+                    <h3>{project.name}</h3>
+                    <p>{project.description}</p>
+                    <div className="tech-stack">
+                      {project.tech.map((tech) => (
+                        <span key={`${project.name}-${tech}`} className="tech-tag">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
                     >
-                      <h3>{project.name}</h3>
-                      <p>{project.description}</p>
-                      <div className="tech-stack">
-                        {project.tech.map((tech) => (
-                          <span key={`${project.name}-${tech}`} className="tech-tag">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
-                        GitHub'da İncele
-                      </a>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.section>
-            </div>
+                      GitHub'da İncele
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
           </motion.div>
         ) : (
           <motion.div
             key="contact"
-            className="app-container"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            className="contact-page"
+            id="contact"
           >
-            <div className="contact-page">
-              <div className="contact-container">
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  İletişim
-                </motion.h2>
+            <div className="contact-container">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                İletişim
+              </motion.h2>
+              <motion.div 
+                className="contact-cards"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: 0.2,
+                  staggerChildren: 0.1
+                }}
+              >
                 <motion.div 
-                  className="contact-cards"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.5,
-                    delay: 0.2,
-                    staggerChildren: 0.1
-                  }}
+                  className="contact-card glass-effect"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <motion.div 
-                    className="contact-card glass-effect"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                  <h3>LinkedIn</h3>
+                  <p>Profesyonel profilimi inceleyin</p>
+                  <motion.a 
+                    href="https://www.linkedin.com/in/ibrahim-gülmez-8bb9501b1/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <h3>LinkedIn</h3>
-                    <p>Profesyonel profilimi inceleyin</p>
-                    <motion.a 
-                      href="https://www.linkedin.com/in/ibrahim-gülmez-8bb9501b1/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      LinkedIn Profilim
-                    </motion.a>
-                  </motion.div>
-                  
-                  <motion.div 
-                    className="contact-card glass-effect"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <h3>E-posta</h3>
-                    <p>Benimle iletişime geçin</p>
-                    <motion.a 
-                      href="mailto:ibrahiimgulmez@gmail.com"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      ibrahiimgulmez@gmail.com
-                    </motion.a>
-                  </motion.div>
+                    LinkedIn Profilim
+                  </motion.a>
                 </motion.div>
-              </div>
+                
+                <motion.div 
+                  className="contact-card glass-effect"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <h3>E-posta</h3>
+                  <p>Benimle iletişime geçin</p>
+                  <motion.a 
+                    href="mailto:ibrahiimgulmez@gmail.com"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    ibrahiimgulmez@gmail.com
+                  </motion.a>
+                </motion.div>
+              </motion.div>
             </div>
             <Footer />
           </motion.div>
         )}
       </AnimatePresence>
+      {!showContact && <Footer />}
       <SpeedInsights />
       <Analytics />
     </div>
