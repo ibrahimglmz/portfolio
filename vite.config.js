@@ -54,13 +54,16 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     cssMinify: true,
-    target: 'esnext'
+    target: 'esnext',
+    copyPublicDir: true
   },
   server: {
     port: 3000,
-    open: true
+    open: true,
+    historyApiFallback: true
   },
   preview: {
-    port: 3000
+    port: 3000,
+    historyApiFallback: true
   }
 })

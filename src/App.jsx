@@ -22,7 +22,7 @@ function App() {
   const [showContact, setShowContact] = useState(false)
   const projects = [
     {
-      name: "Salim Gülmez Gayrimenkul",
+      name: "Salim Gülmez Gayrimenkul Şirketi",
       description: "Gayrimenkul danışmanlık şirketi için tasarlanmış modern ve profesyonel bir web sitesi.",
       github: "https://salimgulmez.com",
       tech: ["React", "HTML", "CSS", "JavaScript"]
