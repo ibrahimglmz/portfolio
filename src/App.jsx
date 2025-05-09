@@ -22,6 +22,18 @@ function App() {
   const [showContact, setShowContact] = useState(false)
   const projects = [
     {
+      name: "Salim Gülmez Gayrimenkul",
+      description: "Gayrimenkul danışmanlık şirketi için tasarlanmış modern ve profesyonel bir web sitesi.",
+      github: "https://salimgulmez.com",
+      tech: ["React", "HTML", "CSS", "JavaScript"]
+    },
+    {
+      name: "Zaman Bilimi",
+      description: "Şirkete özel geliştirilen zaman yönetimi ve takip sistemi uygulaması.",
+      github: "https://zamanbilimi.com/login",
+      tech: ["React", "Node.js", "MongoDB", "Express"]
+    },
+    {
       name: "Quiz App",
       description: "Hapishaneden kaçış temalı, 4 aşamalı interaktif bir quiz oyunu. React ve Framer Motion kullanılarak geliştirildi.",
       github: "https://github.com/ibrahimglmz/quiz-app.git",
@@ -185,7 +197,9 @@ function App() {
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
-                      GitHub'da İncele
+                      {project.name === "Salim Gülmez Gayrimenkul" || project.name === "Zaman Bilimi" 
+                        ? "Web Sitesine Git" 
+                        : "GitHub'da İncele"}
                     </a>
                   </motion.div>
                 ))}
