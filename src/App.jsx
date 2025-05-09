@@ -197,7 +197,7 @@ function App() {
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
-                      {project.name === "Salim Gülmez Gayrimenkul" || project.name === "Zaman Bilimi" 
+                      {project.name === "Salim Gülmez Gayrimenkul Şirketi" || project.name === "Zaman Bilimi" 
                         ? "Web Sitesine Git" 
                         : "GitHub'da İncele"}
                     </a>
