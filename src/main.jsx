@@ -7,7 +7,11 @@ import './index.css'
 // Service Worker kaydı
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    const swUrl = import.meta.env.MODE === 'production' 
+      ? '/my_web/sw.js' 
+      : '/sw.js';
+      
+    navigator.serviceWorker.register(swUrl)
       .then(registration => {
         console.log('SW registered:', registration);
       })
