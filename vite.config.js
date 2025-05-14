@@ -2,6 +2,28 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import compression from 'vite-plugin-compression'
 import { resolve } from 'path'
+import fs from 'fs'
+
+// Manifest ve diğer dosyaları dizine kopyalamak için fonksiyon
+const copyPublicFiles = () => {
+  return {
+    name: 'copy-files',
+    writeBundle() {
+      // .nojekyll dosyasını oluştur
+      fs.writeFileSync('./dist/.nojekyll', '')
+      
+      // manifest.json dosyasını kopyala
+      if (fs.existsSync('./public/manifest.json')) {
+        fs.copyFileSync('./public/manifest.json', './dist/manifest.json')
+      }
+      
+      // favicon.svg dosyasını kopyala
+      if (fs.existsSync('./public/favicon.svg')) {
+        fs.copyFileSync('./public/favicon.svg', './dist/favicon.svg')
+      }
+    }
+  }
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,6 +37,7 @@ export default defineConfig({
       algorithm: 'brotliCompress',
       ext: '.br',
     }),
+    copyPublicFiles()
   ],
   base: './',
   build: {
