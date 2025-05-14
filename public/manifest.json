@@ -2,7 +2,7 @@
   "name": "İbrahim Gülmez - Portfolio",
   "short_name": "İbrahim Gülmez",
   "description": "İbrahim Gülmez - Kişisel Portfolyo Sitesi",
-  "start_url": "/my_web/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
