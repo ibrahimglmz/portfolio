@@ -27,7 +27,7 @@ jobs:
           node-version: '18'
           cache: 'npm'
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Create .nojekyll file
@@ -36,4 +36,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # Derlenmiş dosyalarınızın bulunduğu klasör
-          branch: gh-pages # Deployments için kullanılacak branş 
+          branch: gh-pages # Deployments için kullanılacak branş
+          clean: true # Önceki deploymentları temizler
+          single-commit: true # Tek bir commit oluşturur, tarihçeyi korumaz 
