@@ -30,8 +30,14 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-      - name: Create .nojekyll file
-        run: touch dist/.nojekyll
+      - name: Copy additional files
+        run: |
+          cp -f public/_headers dist/ || true
+          cp -f public/web.config dist/ || true
+          cp -f public/.htaccess dist/ || true
+          cp -f public/favicon.svg dist/ || true
+          cp -f public/manifest.json dist/ || true
+          touch dist/.nojekyll
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
