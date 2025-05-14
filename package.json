@@ -6,7 +6,7 @@
   "homepage": "https://ibrahimglmz.github.io/my_web",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp public/.nojekyll dist/",
+    "build": "vite build && cp public/.nojekyll dist/ && cp -f public/_headers dist/ && cp -f public/web.config dist/ && cp -f public/.htaccess dist/ && cp -f public/favicon.svg dist/ && cp -f public/manifest.json dist/",
     "start": "serve dist -s",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
