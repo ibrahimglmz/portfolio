@@ -39,7 +39,7 @@ export default defineConfig({
     }),
     copyPublicFiles()
   ],
-  base: './',
+  base: '/my_web/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
