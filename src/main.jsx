@@ -8,7 +8,7 @@ import './index.css'
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     const swUrl = import.meta.env.MODE === 'production' 
-      ? '/my_web/sw.js' 
+      ? './sw.js' 
       : '/sw.js';
       
     navigator.serviceWorker.register(swUrl)
@@ -23,7 +23,7 @@ if ('serviceWorker' in navigator) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HashRouter basename="/">
+    <HashRouter>
       <App />
     </HashRouter>
   </React.StrictMode>
