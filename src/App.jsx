@@ -247,7 +247,7 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="contact-page"
+            className={`contact-page ${isMobile ? 'mobile-contact' : ''}`}
             id="contact"
           >
             <div className="contact-container">
@@ -270,7 +270,7 @@ function App() {
               >
                 <motion.div 
                   className="contact-card glass-effect"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: isMobile ? 1.01 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -289,7 +289,7 @@ function App() {
                 
                 <motion.div 
                   className="contact-card glass-effect"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: isMobile ? 1.01 : 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -301,6 +301,25 @@ function App() {
                     whileTap={{ scale: 0.95 }}
                   >
                     ibrahiimgulmez@gmail.com
+                  </motion.a>
+                </motion.div>
+
+                <motion.div 
+                  className="contact-card glass-effect"
+                  whileHover={{ scale: isMobile ? 1.01 : 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <h3>GitHub</h3>
+                  <p>Projelerimi inceleyebilirsiniz</p>
+                  <motion.a 
+                    href="https://github.com/ibrahimglmz"
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    GitHub Profilim
                   </motion.a>
                 </motion.div>
               </motion.div>

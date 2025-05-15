@@ -809,23 +809,30 @@ section {
   box-shadow: 0 2px 10px rgba(0, 184, 148, 0.2);
 }
 
-/* Contact sayfası stilleri */
+/* Contact sayfası stilleri - yeniden düzenlendi */
 .contact-page {
-  min-height: calc(100vh - 80px - 300px); /* Navbar ve footer yüksekliğini çıkarıyoruz */
+  min-height: calc(100vh - 80px); /* Navbar yüksekliğini çıkarıyoruz */
   padding: 4rem 2rem;
   display: flex;
-  align-items: flex-start; /* Üstten başlasın */
-  justify-content: center;
-  margin-bottom: 0; /* Footer ile arasında boşluk olmasın */
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0; 
   position: relative;
   flex: 1;
+  width: 100%;
+}
+
+.mobile-contact {
+  padding: 2rem 1rem;
 }
 
 .contact-container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 3rem;
   padding: 0 1rem;
+  flex: 1;
 }
 
 .contact-container h2 {
@@ -834,6 +841,8 @@ section {
   color: var(--primary-color);
   position: relative;
   display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 .contact-container h2::after {
@@ -849,46 +858,223 @@ section {
 }
 
 .contact-section {
-  padding: 4rem 2rem;
+  padding: 3rem 1rem;
+  width: 100%;
 }
 
 .contact-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  width: 100%;
 }
 
 .contact-card {
   padding: 2rem;
   text-align: center;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 100%;
 }
 
 .contact-card h3 {
-  margin-bottom: 1rem;
-  color: #fff;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.contact-card p {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
 }
 
 .contact-card a {
-  color: #8b5cf6;
+  color: #fff;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, var(--secondary-color), #00b894);
+  border-radius: 30px;
+  font-weight: 500;
+  display: inline-block;
+  width: fit-content;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact-card a:hover {
-  color: #6366f1;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Glass Effect */
+.contact-card a:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Glass Effect için geliştirilmiş stil */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* İletişim sayfası mobil stilleri - iyileştirildi */
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 3rem 1rem 1rem;
+    min-height: auto;
+  }
+
+  .contact-container {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+
+  .contact-container h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .contact-container h2::after {
+    width: 50px;
+  }
+
+  .contact-cards {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+    margin: 0;
+    width: 100%;
+    min-height: 180px;
+  }
+
+  .contact-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+  }
+
+  .contact-card a {
+    font-size: 0.9rem;
+    padding: 0.7rem 1.2rem;
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page {
+    padding: 2rem 0.8rem 0;
+  }
+
+  .contact-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-container h2::after {
+    width: 40px;
+    height: 3px;
+  }
+
+  .contact-cards {
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-card {
+    padding: 1.2rem 1rem;
+    border-radius: 0.8rem;
+    min-height: 160px;
+    gap: 1rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-card p {
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-card a {
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+    border-radius: 20px;
+  }
+}
+
+/* Yatay ekran düzeltmeleri */
+@media (max-height: 600px) and (orientation: landscape) {
+  .contact-page {
+    padding: 2rem 1rem;
+  }
+
+  .contact-container {
+    margin-bottom: 1rem;
+  }
+
+  .contact-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .contact-card {
+    padding: 1rem;
+    min-height: 150px;
+    gap: 0.5rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-card p {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card a {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Tablet optimizasyonu */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .contact-cards {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    padding: 1.8rem;
+  }
 }
 
 /* Tablet için media sorguları */
@@ -1905,95 +2091,4 @@ section {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-}
-
-/* İletişim sayfası mobil stilleri */
-@media (max-width: 768px) {
-  .contact-page {
-    padding: 2rem 1rem;
-    min-height: calc(100vh - 80px - 250px); /* Mobilde footer daha küçük */
-  }
-
-  .contact-container {
-    padding: 0;
-  }
-
-  .contact-container h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .contact-cards {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding: 0;
-  }
-
-  .contact-card {
-    padding: 1.5rem;
-    margin: 0;
-    width: 100%;
-  }
-
-  .contact-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .contact-card p {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    color: var(--text-light);
-  }
-
-  .contact-card a {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    display: inline-block;
-    width: auto;
-    background: linear-gradient(135deg, var(--secondary-color), #00b894);
-    color: white;
-    border-radius: 25px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .contact-card a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-page {
-    padding: 1.5rem 0.8rem;
-    min-height: calc(100vh - 80px - 200px); /* Daha da küçük ekranlarda footer daha da küçük */
-  }
-
-  .contact-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .contact-cards {
-    gap: 1.2rem;
-  }
-
-  .contact-card {
-    padding: 1.2rem;
-  }
-
-  .contact-card h3 {
-    font-size: 1.2rem;
-  }
-
-  .contact-card p {
-    font-size: 0.85rem;
-  }
-
-  .contact-card a {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
-  }
 }
