@@ -1,0 +1,8 @@
+# SPA yönlendirmesi
+/*    /index.html   200
+
+# MIME tipleri
+/my_web/*.js     /my_web/*.js      200!    Content-Type=application/javascript
+/my_web/*.jsx    /my_web/*.jsx     200!    Content-Type=application/javascript 
+/my_web/*.css    /my_web/*.css     200!    Content-Type=text/css
+/my_web/*.json   /my_web/*.json    200!    Content-Type=application/json 
