@@ -6,6 +6,49 @@ const Navbar = ({ showContact, setShowContact }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  // Minimum dokunma kaydırma mesafesi (px)
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isSwipe = Math.abs(distance) > minSwipeDistance;
+
+    if (isSwipe) {
+      // Sağa kaydırma - menüyü kapat
+      if (distance < 0 && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    }
+
+    // Reset değerleri
+    setTouchStart(null);
+    setTouchEnd(null);
+  };
+  
+  // Body'nin scroll özelliğini kilitlemek/açmak için
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMenuOpen]);
 
   const scrollToSection = (sectionId, shouldSetContact = null) => {
     const element = document.getElementById(sectionId);
@@ -203,6 +246,8 @@ const Navbar = ({ showContact, setShowContact }) => {
           className="menu-toggle"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           whileTap={{ scale: 0.95 }}
+          aria-label={isMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
+          aria-expanded={isMenuOpen}
         >
           <div className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
             <span></span>
@@ -220,6 +265,9 @@ const Navbar = ({ showContact, setShowContact }) => {
               animate="open"
               exit="closed"
               variants={menuVariants}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               {[...mainNavItems, ...rightNavItems].map((item, index) => (
                 <motion.a
@@ -228,6 +276,7 @@ const Navbar = ({ showContact, setShowContact }) => {
                   variants={itemVariants}
                   className={`mobile-nav-item ${activeSection === item.href ? 'active' : ''}`}
                   style={{ cursor: 'pointer' }}
+                  aria-label={item.title}
                 >
                   <span className="nav-icon">{item.icon}</span>
                   <span className="nav-text">{item.title}</span>
@@ -242,6 +291,7 @@ const Navbar = ({ showContact, setShowContact }) => {
                     rel="noopener noreferrer"
                     variants={itemVariants}
                     className="mobile-social-link"
+                    aria-label={link.title}
                   >
                     {link.icon}
                     <span className="social-text">{link.title}</span>

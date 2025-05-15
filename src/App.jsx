@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react'
+import { useState, lazy, Suspense, useEffect } from 'react'
 import './App.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
@@ -20,6 +20,32 @@ const LoadingSpinner = () => (
 
 function App() {
   const [showContact, setShowContact] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isLandscape, setIsLandscape] = useState(false)
+  
+  // Ekran boyutunu ve oryantasyonunu algılama
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth <= 768)
+      setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1024)
+      setIsLandscape(window.innerWidth > window.innerHeight)
+    }
+    
+    // İlk yüklemede kontrol et
+    checkDevice()
+    
+    // Ekran boyutu değişince kontrol et
+    window.addEventListener('resize', checkDevice)
+    window.addEventListener('orientationchange', checkDevice)
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkDevice)
+      window.removeEventListener('orientationchange', checkDevice)
+    }
+  }, [])
+  
   const projects = [
     {
       name: "Salim Gülmez Gayrimenkul Şirketi",
@@ -105,13 +131,19 @@ function App() {
   const staggerContainer = {
     animate: {
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: isMobile ? 0.1 : 0.2 // Mobil cihazda daha hızlı
       }
     }
   }
+  
+  // Dokunma olayları için kullanılan değişkenler
+  const touchProps = {
+    whileTap: { scale: 0.98 },
+    transition: { duration: 0.2 }
+  }
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''} ${isLandscape ? 'landscape' : 'portrait'}`}>
       <Navbar showContact={showContact} setShowContact={setShowContact} />
       <AnimatePresence mode="wait">
         {!showContact ? (
@@ -127,13 +159,13 @@ function App() {
             <div className="animated-shape shape-2"></div>
             <div className="animated-shape shape-3"></div>
             
-            <header className="hero-section">
+            <header id="home" className="hero-section">
               <div className="hero-content">
                 <motion.div 
                   className="hero-text"
-                  initial={{ opacity: 0, x: -100 }}
+                  initial={{ opacity: 0, x: isMobile ? 0 : -100 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
+                  transition={{ duration: isMobile ? 0.6 : 0.8 }}
                 >
                   <h1>İbrahim Gülmez</h1>
                 </motion.div>
@@ -142,6 +174,7 @@ function App() {
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.8 }}
+                  {...touchProps}
                 >
                   <img 
                     src={profileImage}
@@ -167,7 +200,7 @@ function App() {
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: isMobile ? "-50px" : "-100px" }}
             >
               <motion.h2 variants={fadeInUp}>
                 Projelerim
@@ -178,10 +211,11 @@ function App() {
                     key={project.name} 
                     className="project-card"
                     variants={fadeInUp}
-                    whileHover={{ 
+                    whileHover={!isMobile ? { 
                       scale: 1.05,
                       transition: { duration: 0.2 }
-                    }}
+                    } : {}}
+                    {...touchProps}
                   >
                     <h3>{project.name}</h3>
                     <p>{project.description}</p>
