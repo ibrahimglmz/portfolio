@@ -29,15 +29,7 @@ const copyPublicFiles = () => {
 export default defineConfig({
   plugins: [
     react(),
-    compression({
-      algorithm: 'gzip',
-      ext: '.gz',
-    }),
-    compression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-    }),
-    copyPublicFiles()
+    compression()
   ],
   base: '/my_web/',
   build: {
@@ -94,5 +86,8 @@ export default defineConfig({
   preview: {
     port: 3000,
     historyApiFallback: true
-  }
+  },
+  css: {
+    postcss: './postcss.config.cjs',
+  },
 })

@@ -15,56 +15,59 @@ const About = () => {
 
   return (
     <motion.section 
-      className="about-section"
+      id="about"
+      className="py-20 bg-white"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
       viewport={{ once: true }}
     >
-      <h2>Hakkımda</h2>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <motion.p>
-          {firstPart}
-        </motion.p>
-        
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ 
-            opacity: isExpanded ? 1 : 0,
-            height: isExpanded ? "auto" : 0
-          }}
-          transition={{ duration: 0.5 }}
-          style={{ overflow: "hidden" }}
+      <div className="max-w-[1600px] mx-auto px-4">
+        <motion.h2 
+          className="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 text-text-primary"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          <p>{remainingPart}</p>
-        </motion.div>
+          Hakkımda
+        </motion.h2>
 
-        <motion.button
-          className="read-more-btn"
-          onClick={() => setIsExpanded(!isExpanded)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={{
-            background: "linear-gradient(to right, var(--secondary-color), #00b894)",
-            border: "none",
-            padding: "10px 20px",
-            borderRadius: "8px",
-            color: "white",
-            cursor: "pointer",
-            marginTop: "20px",
-            fontSize: "1rem",
-            fontWeight: "500",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
-          }}
+        <motion.div
+          className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
-          {isExpanded ? "Daha Az Göster" : "Devamını Oku"}
-        </motion.button>
-      </motion.div>
+          <motion.p className="text-text-primary leading-relaxed mb-6">
+            {firstPart}
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ 
+              opacity: isExpanded ? 1 : 0,
+              height: isExpanded ? "auto" : 0
+            }}
+            transition={{ duration: 0.5 }}
+            className="overflow-hidden"
+          >
+            <p className="text-text-primary leading-relaxed whitespace-pre-line">
+              {remainingPart}
+            </p>
+          </motion.div>
+
+          <motion.button
+            className="mt-6 px-6 py-3 bg-primary text-white rounded-xl font-medium shadow-lg hover:bg-primary-dark transition-all duration-300"
+            onClick={() => setIsExpanded(!isExpanded)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isExpanded ? "Daha Az Göster" : "Devamını Oku"}
+          </motion.button>
+        </motion.div>
+      </div>
     </motion.section>
   )
 }

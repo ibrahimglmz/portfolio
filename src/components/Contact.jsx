@@ -1,43 +1,85 @@
 import { motion } from 'framer-motion';
+import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 
 const Contact = () => {
   return (
-    <section id="contact" className="contact-section">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        İletişim
-      </motion.h2>
-      <div className="contact-cards">
+    <motion.section
+      id="contact"
+      className="py-20 bg-gradient-to-b from-background to-background-dark"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="container">
         <motion.div
-          className="contact-card glass-effect"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          <h3>LinkedIn</h3>
-          <a
-            href="https://linkedin.com/in/yourusername"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            linkedin.com/in/yourusername
-          </a>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
+            İletişime Geçin
+          </h2>
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            Projeleriniz veya iş birliği fırsatları için benimle iletişime geçebilirsiniz.
+            Size en kısa sürede dönüş yapacağım.
+          </p>
         </motion.div>
 
-        <motion.div
-          className="contact-card glass-effect"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <h3>Email</h3>
-          <a href="mailto:your.email@example.com">
-            your.email@example.com
-          </a>
-        </motion.div>
+        <div className="max-w-4xl mx-auto">
+          {/* İletişim Bilgileri */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-xl text-primary">
+                  <FaEnvelope size={24} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2 text-text-primary">Email</h3>
+                  <a href="mailto:ibrahiimgulmez@gmail.com" className="text-text-secondary hover:text-primary transition-colors">
+                    ibrahiimgulmez@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-xl text-primary">
+                  <FaMapMarkerAlt size={24} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2 text-text-primary">Konum</h3>
+                  <p className="text-text-secondary">İstanbul, Türkiye</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 md:col-span-2">
+              <h3 className="text-xl font-semibold mb-4 text-text-primary">Sosyal Medya</h3>
+              <div className="flex gap-4">
+                <a href="https://linkedin.com/in/ibrahim-gülmez-8bb9501b1" target="_blank" rel="noopener noreferrer" 
+                   className="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-xl text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaLinkedin size={24} />
+                </a>
+                <a href="https://github.com/ibrahimglmz" target="_blank" rel="noopener noreferrer"
+                   className="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-xl text-primary hover:bg-primary hover:text-white transition-all duration-300">
+                  <FaGithub size={24} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -1,10 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FaLinkedinIn, FaGithub, FaHome, FaEnvelope, FaCode } from 'react-icons/fa';
+import { FaLinkedinIn, FaGithub, FaHome, FaEnvelope, FaCode, FaBars, FaTimes } from 'react-icons/fa';
 
-const Navbar = ({ showContact, setShowContact }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -27,8 +27,8 @@ const Navbar = ({ showContact, setShowContact }) => {
 
     if (isSwipe) {
       // Sağa kaydırma - menüyü kapat
-      if (distance < 0 && isMenuOpen) {
-        setIsMenuOpen(false);
+      if (distance < 0 && isOpen) {
+        setIsOpen(false);
       }
     }
 
@@ -39,7 +39,7 @@ const Navbar = ({ showContact, setShowContact }) => {
   
   // Body'nin scroll özelliğini kilitlemek/açmak için
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
@@ -48,77 +48,47 @@ const Navbar = ({ showContact, setShowContact }) => {
     return () => {
       document.body.style.overflow = 'auto';
     }
-  }, [isMenuOpen]);
+  }, [isOpen]);
 
-  const scrollToSection = (sectionId, shouldSetContact = null) => {
+  const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbarHeight = 80; // Navbar yüksekliği
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
-    
-    if (shouldSetContact !== null) {
-      setShowContact(shouldSetContact);
-    }
-    
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
+      setIsOpen(false);
     }
   };
 
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
 
       // Aktif bölümü belirleme
-      const sections = ['home', 'contact'];
-      let currentSection = sections[0];
-      
-      for (let section of sections) {
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            currentSection = section;
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
             break;
           }
         }
       }
-      
-      setActiveSection(currentSection);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const mainNavItems = [
-    { 
-      title: 'Ana Sayfa',
-      href: 'home',
-      icon: <FaHome size={18} />,
-      onClick: () => scrollToSection('home', false)
-    }
-  ];
-
-  const rightNavItems = [
-    { 
-      title: 'İletişim',
-      href: 'contact',
-      icon: <FaEnvelope size={18} />,
-      onClick: () => scrollToSection('contact', true)
-    }
+  const navLinks = [
+    { id: 'home', text: 'Ana Sayfa' },
+    { id: 'about', text: 'Hakkımda' },
+    { id: 'skills', text: 'Yetenekler' },
+    { id: 'projects', text: 'Projeler' },
+    { id: 'contact', text: 'İletişim' },
   ];
 
   const socialLinks = [
@@ -170,137 +140,94 @@ const Navbar = ({ showContact, setShowContact }) => {
 
   return (
     <motion.nav
-      className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="nav-content">
-        <motion.div 
-          className="logo"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <a onClick={() => scrollToSection('home', false)} style={{ cursor: 'pointer' }}>
-            <span className="logo-icon">
-              <FaCode size={24} />
-            </span>
-            <div className="logo-text">
-              <span className="logo-name">İbrahim</span>
-              <span className="logo-surname">Gülmez</span>
-            </div>
-          </a>
-        </motion.div>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          <motion.a 
+            href="#" 
+            className="text-2xl font-bold text-primary"
+            onClick={(e) => {
+              e.preventDefault();
+              const homeSection = document.getElementById('home');
+              if (homeSection) {
+                homeSection.scrollIntoView({ behavior: 'smooth' });
+                setActiveSection('home');
+              }
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            İbrahim Gülmez
+          </motion.a>
 
-        {/* Ana Menü ve Sağ Menü */}
-        <div className="nav-links desktop-menu">
-          {mainNavItems.map((item, index) => (
-            <motion.a
-              key={index}
-              onClick={item.onClick}
-              className={activeSection === item.href ? 'active' : ''}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              style={{ cursor: 'pointer' }}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              <span className="nav-text">{item.title}</span>
-            </motion.a>
-          ))}
-          
-          {rightNavItems.map((item, index) => (
-            <motion.a
-              key={`right-${index}`}
-              onClick={item.onClick}
-              className={activeSection === item.href ? 'active' : ''}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              style={{ cursor: 'pointer' }}
-            >
-              <span className="nav-icon">{item.icon}</span>
-              <span className="nav-text">{item.title}</span>
-            </motion.a>
-          ))}
-        </div>
-
-        {/* Sosyal Medya Linkleri */}
-        <div className="social-links desktop-menu">
-          {socialLinks.map((link, index) => (
-            <motion.a
-              key={index}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="social-link"
-              title={link.title}
-            >
-              {link.icon}
-            </motion.a>
-          ))}
-        </div>
-
-        {/* Mobil Menü Butonu */}
-        <motion.button
-          className="menu-toggle"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          whileTap={{ scale: 0.95 }}
-          aria-label={isMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
-          aria-expanded={isMenuOpen}
-        >
-          <div className={`hamburger ${isMenuOpen ? 'open' : ''}`}>
-            <span></span>
-            <span></span>
-            <span></span>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <motion.a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.id);
+                }}
+                className={`text-text-primary hover:text-primary transition-colors duration-300 ${
+                  activeSection === link.id ? 'text-primary font-semibold' : ''
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {link.text}
+              </motion.a>
+            ))}
           </div>
-        </motion.button>
 
-        {/* Mobil Menü */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="mobile-menu"
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              {[...mainNavItems, ...rightNavItems].map((item, index) => (
+          {/* Mobile Menu Button */}
+          <motion.button
+            className="md:hidden text-text-primary hover:text-primary transition-colors duration-300"
+            onClick={() => setIsOpen(!isOpen)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </motion.button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <motion.div
+            className="md:hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2">
+              {navLinks.map((link) => (
                 <motion.a
-                  key={`mobile-${index}`}
-                  onClick={item.onClick}
-                  variants={itemVariants}
-                  className={`mobile-nav-item ${activeSection === item.href ? 'active' : ''}`}
-                  style={{ cursor: 'pointer' }}
-                  aria-label={item.title}
+                  key={link.id}
+                  href={`#${link.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(link.id);
+                  }}
+                  className={`block px-3 py-2 text-text-primary hover:text-primary transition-colors duration-300 ${
+                    activeSection === link.id ? 'text-primary font-semibold' : ''
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-text">{item.title}</span>
+                  {link.text}
                 </motion.a>
               ))}
-              <div className="mobile-social-links">
-                {socialLinks.map((link, index) => (
-                  <motion.a
-                    key={`mobile-social-${index}`}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variants={itemVariants}
-                    className="mobile-social-link"
-                    aria-label={link.title}
-                  >
-                    {link.icon}
-                    <span className="social-text">{link.title}</span>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </motion.div>
+        )}
       </div>
     </motion.nav>
   );

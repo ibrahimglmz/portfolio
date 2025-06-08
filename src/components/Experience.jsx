@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 const Experience = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
   const experiences = [
     {
@@ -14,7 +15,8 @@ const Experience = () => {
         "Bilgi yönetim sistemleri üzerinde çalışma",
         "Stajyer olarak profesyonel iş deneyimi"
       ],
-      color: "#6c5ce7"
+      color: "#6c5ce7",
+      icon: "💻"
     },
     {
       title: "GDSC Kulüp Başkan Yardımcısı",
@@ -25,7 +27,8 @@ const Experience = () => {
         "Teknoloji odaklı etkinliklerin organizasyonu",
         "Öğrenci topluluğu liderliği ve koordinasyon"
       ],
-      color: "#e17055"
+      color: "#e17055",
+      icon: "👨‍💻"
     },
     {
       title: "T3 AI Volunteer",
@@ -36,7 +39,8 @@ const Experience = () => {
         "T3 AI ekibi ile işbirliği",
         "AI teknolojileri konusunda deneyim kazanma"
       ],
-      color: "#a29bfe"
+      color: "#a29bfe",
+      icon: "🤖"
     },
     {
       title: "Freelance Yazılım Geliştirici",
@@ -47,7 +51,8 @@ const Experience = () => {
         "Müşteri odaklı özel yazılım çözümleri",
         "Modern teknolojiler ile full-stack geliştirme"
       ],
-      color: "#0984e3"
+      color: "#0984e3",
+      icon: "🚀"
     },
     {
       title: "Üretken Akademi",
@@ -57,10 +62,10 @@ const Experience = () => {
         "Üretken Akademi bünyesinde online staj programına katılım",
         "Yazılım geliştirme ve proje yönetimi konularında deneyim"
       ],
-      color: "#00b894"
+      color: "#00b894",
+      icon: "📚"
     }
   ].sort((a, b) => {
-    // Tarihleri parçalara ayır
     const getDate = (dateStr) => {
       const [start] = dateStr.split(' - ');
       const [month, year] = start.split(' ');
@@ -98,88 +103,115 @@ const Experience = () => {
 
   return (
     <motion.section 
-      className="experience-section"
+      className="py-20 bg-white"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={containerVariants}
     >
-      <motion.div
-        className="section-title-container"
-        variants={titleVariants}
-      >
-        <h2>Deneyim</h2>
-        <div className="section-title-line"></div>
-      </motion.div>
+      <div className="max-w-[1600px] mx-auto px-4">
+        <motion.div
+          className="text-center mb-16"
+          variants={titleVariants}
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary relative inline-block">
+            Deneyim
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded"></div>
+          </h2>
+        </motion.div>
 
-      <div className="timeline">
-        {experiences.map((experience, index) => (
-          <motion.div 
-            key={index}
-            className="timeline-item"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ 
-              duration: 0.6, 
-              delay: index * 0.2,
-              type: "spring",
-              stiffness: 100
-            }}
-            viewport={{ once: true }}
-            onHoverStart={() => setHoveredIndex(index)}
-            onHoverEnd={() => setHoveredIndex(null)}
-          >
+        <div className="relative">
+          <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary/20 to-secondary/20"></div>
+          
+          {experiences.map((experience, index) => (
             <motion.div 
-              className="timeline-dot"
-              style={{ backgroundColor: experience.color }}
-              animate={{
-                scale: hoveredIndex === index ? 1.2 : 1,
-                boxShadow: hoveredIndex === index 
-                  ? `0 0 20px ${experience.color}80` 
-                  : `0 0 0 3px ${experience.color}40`
+              key={index}
+              className="relative mb-16 last:mb-0"
+              initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.2,
+                type: "spring",
+                stiffness: 100
               }}
-            />
-            <motion.div 
-              className="timeline-content"
-              animate={{
-                boxShadow: hoveredIndex === index 
-                  ? '0 10px 30px rgba(0, 0, 0, 0.2)' 
-                  : '0 5px 15px rgba(0, 0, 0, 0.1)',
-                y: hoveredIndex === index ? -5 : 0
-              }}
-              transition={{ type: "spring", stiffness: 300 }}
+              viewport={{ once: true }}
+              onHoverStart={() => setHoveredIndex(index)}
+              onHoverEnd={() => setHoveredIndex(null)}
+              onClick={() => setSelectedIndex(selectedIndex === index ? null : index)}
             >
-              <motion.h3
-                animate={{
-                  color: hoveredIndex === index ? experience.color : '#2d3436'
-                }}
-              >
-                {experience.title}
-              </motion.h3>
-              <h4>{experience.company}</h4>
-              <p className="timeline-date">{experience.date}</p>
-              <ul>
-                {experience.details.map((detail, detailIndex) => (
-                  <motion.li 
-                    key={detailIndex}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ 
-                      opacity: hoveredIndex === index ? 1 : 0.8,
-                      x: hoveredIndex === index ? 0 : -10
-                    }}
-                    transition={{ 
-                      delay: detailIndex * 0.1,
-                      type: "spring",
-                      stiffness: 200
+              <div className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                <motion.div 
+                  className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl z-10 cursor-pointer"
+                  style={{ backgroundColor: experience.color }}
+                  animate={{
+                    scale: hoveredIndex === index ? 1.2 : 1,
+                    boxShadow: hoveredIndex === index 
+                      ? `0 0 30px ${experience.color}80` 
+                      : `0 0 0 3px ${experience.color}40`
+                  }}
+                >
+                  {experience.icon}
+                </motion.div>
+                
+                <motion.div 
+                  className={`flex-1 bg-white rounded-xl p-6 shadow-lg cursor-pointer transform transition-all duration-300 ${
+                    selectedIndex === index ? 'scale-105' : ''
+                  }`}
+                  animate={{
+                    boxShadow: hoveredIndex === index 
+                      ? '0 10px 30px rgba(0, 0, 0, 0.2)' 
+                      : '0 5px 15px rgba(0, 0, 0, 0.1)',
+                    y: hoveredIndex === index ? -5 : 0
+                  }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.h3
+                    className="text-xl font-bold mb-2"
+                    animate={{
+                      color: hoveredIndex === index ? experience.color : '#2d3436'
                     }}
                   >
-                    {detail}
-                  </motion.li>
-                ))}
-              </ul>
+                    {experience.title}
+                  </motion.h3>
+                  <h4 className="text-lg text-text-secondary mb-1">{experience.company}</h4>
+                  <p className="text-sm text-text-secondary/80 mb-4">{experience.date}</p>
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ 
+                      height: selectedIndex === index ? 'auto' : 0,
+                      opacity: selectedIndex === index ? 1 : 0
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <ul className="space-y-2">
+                      {experience.details.map((detail, detailIndex) => (
+                        <motion.li 
+                          key={detailIndex}
+                          className="text-text-secondary flex items-center gap-2"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ 
+                            opacity: selectedIndex === index ? 1 : 0,
+                            x: selectedIndex === index ? 0 : -10
+                          }}
+                          transition={{ 
+                            delay: detailIndex * 0.1,
+                            type: "spring",
+                            stiffness: 200
+                          }}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                          {detail}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </motion.div>
+              </div>
             </motion.div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </motion.section>
   );
