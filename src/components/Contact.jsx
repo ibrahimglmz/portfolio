@@ -24,7 +24,7 @@ const Contact = () => {
           </h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Projeleriniz veya iş birliği fırsatları için benimle iletişime geçebilirsiniz.
-            Size en kısa sürede dönüş yapacağım.
+            Size en kısa sürede iletişime gececegim.
           </p>
         </motion.div>
 
