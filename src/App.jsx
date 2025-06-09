@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/react"
-import { Analytics } from "@vercel/analytics/react"
 import profileImage from './assets/ibrahim.jpg'
 import { FaLinkedinIn, FaEnvelope, FaGithub, FaCode, FaServer, FaDatabase, FaMobile } from 'react-icons/fa'
 
@@ -321,7 +320,6 @@ function App() {
       </motion.div>
       <Footer />
       <SpeedInsights />
-      <Analytics />
     </div>
   )
 }
