@@ -4,6 +4,13 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 const Projects = () => {
   const projects = [
     {
+      name: "Galeri İstanbul - Rent a Car & Araba Alım Satım",
+      description: "Lüks ve premium araçların alım-satımı ve kiralanması için modern, kullanıcı dostu bir web platformu. Araç galerisi, detaylı ilanlar, iletişim ve hızlı erişim menüleriyle İstanbul’un en prestijli otomotiv galerisi deneyimi sunar.",
+      demo: "https://rentacar-theta.vercel.app",
+      tech: ["React.js", "Tailwind CSS", "Vercel"],
+      color: "from-pink-500/10 to-pink-600/10"
+    },
+    {
       name: "Kişisel Kurumsal Web Sitesi",
       description: "Modern ve profesyonel bir kişisel kurumsal web sitesi. Animasyonlu arayüz, proje portföyü, deneyim ve yetenekler bölümü, iletişim formu ve responsive tasarım özellikleri içerir.",
       demo: "https://reactiva-three.vercel.app",

@@ -4,7 +4,7 @@ import { useState } from 'react'
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const firstPart = `İstanbul Kent Üniversitesi Bilgisayar Programcılığı bölümünden mezun bir yazılım geliştirici olarak, veri işleme ve analiz süreçlerinden, web teknolojilerine kadar geniş bir teknik yetkinliğe sahibim. Python programlama dili ile veri çıkarma, analiz, modelleme ve segmentasyon konularında aktif projeler yürüttüm. Numpy ve Pandas gibi güçlü kütüphaneleri kullanarak veriye dayalı çözümler geliştirmekteyim. Ayrıca, SQL, Docker ve Git gibi teknolojilerle yazılım geliştirme süreçlerini profesyonel bir şekilde yönetebiliyorum.`
+  const firstPart = `İstanbul Kent Üniversitesi Bilgisayar Programcılığı bölümünden mezun bir bilgisayar programcısı olarak, veri işleme ve analiz süreçlerinden, web teknolojilerine kadar geniş bir teknik yetkinliğe sahibim. Python programlama dili ile veri çıkarma, analiz, modelleme ve segmentasyon konularında aktif projeler yürüttüm. Numpy ve Pandas gibi güçlü kütüphaneleri kullanarak veriye dayalı çözümler geliştirmekteyim. Ayrıca, SQL, Docker ve Git gibi teknolojilerle yazılım geliştirme süreçlerini profesyonel bir şekilde yönetebiliyorum.`
 
   const remainingPart = `
         Medya işleme alanında Mediapipe ve OpenCV teknolojileriyle uygulamalar geliştirdim. HTML, CSS ve React bilgimle kullanıcı dostu arayüzler tasarlayarak tam kapsamlı çözümler sunuyorum. Hem bireysel projelerimde hem de çeşitli staj ve gönüllü çalışmalarımda edindiğim tecrübeler sayesinde yazılım geliştirme süreçlerinde analitik düşünme, problem çözme ve ekip çalışması yeteneklerimi pekiştirdim.

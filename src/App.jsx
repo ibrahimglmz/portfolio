@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import profileImage from './assets/ibrahim.jpg'
-import { FaLinkedinIn, FaEnvelope, FaGithub, FaCode, FaServer, FaDatabase, FaMobile } from 'react-icons/fa'
+import { FaLinkedinIn, FaEnvelope, FaGithub, FaCode, FaServer, FaDatabase, FaMobile, FaTools } from 'react-icons/fa'
 
 // Lazy loading ile komponentleri yükle
 const Experience = lazy(() => import('./components/Experience'))
@@ -49,15 +49,10 @@ function App() {
     {
       name: "Frontend Geliştirme",
       icon: <FaCode className="text-4xl" />,
-      description: "React, Vue.js, TypeScript ile modern web uygulamaları geliştirme",
-      technologies: ["React", "Vue.js", "TypeScript", "Tailwind CSS", "Next.js"]
+      description: "React, Next.js, Tailwind CSS ve TypeScript ile modern web uygulamaları geliştirme",
+      technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"]
     },
-    {
-      name: "Backend Geliştirme",
-      icon: <FaServer className="text-4xl" />,
-      description: "Node.js, Python ve Java ile ölçeklenebilir API'ler",
-      technologies: ["Node.js", "Python", "Java", "Express", "Django"]
-    },
+    // Backend Geliştirme nesnesi kaldırıldı
     {
       name: "Veritabanı Yönetimi",
       icon: <FaDatabase className="text-4xl" />,
@@ -69,6 +64,12 @@ function App() {
       icon: <FaMobile className="text-4xl" />,
       description: "React Native ve Swift ile cross-platform mobil uygulamalar",
       technologies: ["React Native", "Swift", "Kotlin", "Flutter", "iOS/Android"]
+    },
+    {
+      name: "Teknik Destek",
+      icon: <FaTools className="text-4xl" />,
+      description: "Donanım kurulumu, yazılım yükleme ve yardım masası (Help Desk) desteği",
+      technologies: ["Donanım Kurulumu", "Yazılım Yükleme", "Help Desk"]
     }
   ]
 
@@ -164,7 +165,7 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 Ölçeklenebilir ve yenilikçi çözümler geliştiren, 
-                modern teknolojileri kullanan bir yazılım mühendisi.
+                modern teknolojileri kullanan bir bilgisayar programcısı.
               </motion.p>
             </motion.div>
             <motion.div 
@@ -289,7 +290,7 @@ function App() {
                   {skill.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{skill.name}</h3>
-                <p className="text-white/70 mb-6">{skill.description}</p>
+                <p className="text-gray-800 mb-6">{skill.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {skill.technologies.map((tech) => (
                     <span key={tech} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
