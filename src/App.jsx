@@ -1,6 +1,7 @@
 import { useState, lazy, Suspense, useEffect } from 'react'
 import './index.css'
 import { motion } from 'framer-motion'
+import Splash from './components/Splash'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/react"
@@ -23,6 +24,7 @@ const LoadingSpinner = () => (
 
 function App() {
   const [showContact, setShowContact] = useState(false)
+  const [showIntro, setShowIntro] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isLandscape, setIsLandscape] = useState(false)
@@ -42,6 +44,19 @@ function App() {
     return () => {
       window.removeEventListener('resize', checkDevice)
       window.removeEventListener('orientationchange', checkDevice)
+    }
+  }, [])
+
+  // İlk açılış karşılama animasyonu (oturum başına bir kere)
+  useEffect(() => {
+    const hasShownIntro = sessionStorage.getItem('introShown') === '1'
+    if (!hasShownIntro) {
+      setShowIntro(true)
+      const timer = setTimeout(() => {
+        setShowIntro(false)
+        sessionStorage.setItem('introShown', '1')
+      }, 1600)
+      return () => clearTimeout(timer)
     }
   }, [])
 
@@ -127,6 +142,7 @@ function App() {
 
   return (
     <div className={`min-h-screen w-full ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''} ${isLandscape ? 'landscape' : 'portrait'}`}>
+      <Splash />
       <Navbar />
       <motion.div
         initial={{ opacity: 0 }}
@@ -175,6 +191,54 @@ function App() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <div className="relative hero-image">
+                <div className="absolute inset-0 -z-10 overflow-visible">
+                  <motion.div
+                    className="w-40 h-40 bg-primary/30 blur-3xl rounded-full absolute -top-8 -left-8"
+                    animate={{
+                      x: [0, 10, -10, 0],
+                      y: [0, -10, 10, 0],
+                      scale: [1, 1.05, 0.98, 1]
+                    }}
+                    transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <motion.div
+                    className="w-44 h-44 bg-secondary/30 blur-3xl rounded-full absolute bottom-0 -right-6"
+                    animate={{
+                      x: [0, -12, 8, 0],
+                      y: [0, 12, -10, 0],
+                      scale: [1, 0.97, 1.03, 1]
+                    }}
+                    transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+                  />
+                  <motion.div
+                    className="w-32 h-32 bg-accent/30 blur-3xl rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+                    animate={{
+                      x: [0, 8, -8, 0],
+                      y: [0, -6, 6, 0],
+                      scale: [1, 1.04, 0.99, 1]
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
+                  />
+                  <motion.div
+                    className="absolute -inset-10 rounded-[120px] opacity-30"
+                    style={{
+                      background:
+                        'conic-gradient(from 0deg, rgba(37,99,235,0.25), rgba(56,189,248,0.2), rgba(99,102,241,0.25), rgba(37,99,235,0.25))'
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                  />
+                  <motion.div
+                    className="w-2 h-2 rounded-full bg-primary/40 absolute top-3 right-4"
+                    animate={{ y: [0, -6, 0], opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <motion.div
+                    className="w-2 h-2 rounded-full bg-secondary/40 absolute bottom-3 left-6"
+                    animate={{ y: [0, 6, 0], opacity: [0.6, 1, 0.6] }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                  />
+                </div>
                 <motion.div 
                   className="absolute -inset-16 rounded-[120px] bg-gradient-to-br from-blue-500/10 to-blue-600/10"
                   animate={{ scale: [1, 1.02, 1] }}
