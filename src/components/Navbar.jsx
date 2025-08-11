@@ -141,14 +141,14 @@ const Navbar = () => {
   return (
     <motion.nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
+        isScrolled ? 'bg-white/70 backdrop-blur-xl shadow-lg' : 'bg-transparent'
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+      <div className="container">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           <motion.a 
             href="#" 
             className="text-2xl font-bold text-primary"
@@ -163,7 +163,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            İbrahim Gülmez
+            <span className="tracking-tight">İbrahim Gülmez</span>
           </motion.a>
 
           {/* Desktop Menu */}
@@ -189,7 +189,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden text-text-primary hover:text-primary transition-colors duration-300"
+            className="md:hidden text-text-primary hover:text-primary transition-colors duration-300 rounded-xl p-2 bg-white/70 backdrop-blur border border-white/50"
             onClick={() => setIsOpen(!isOpen)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -207,7 +207,7 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2">
+            <div className="px-2 pt-2 pb-3 space-y-1 rounded-2xl glass mt-2">
               {navLinks.map((link) => (
                 <motion.a
                   key={link.id}
@@ -216,7 +216,7 @@ const Navbar = () => {
                     e.preventDefault();
                     scrollToSection(link.id);
                   }}
-                  className={`block px-3 py-2 text-text-primary hover:text-primary transition-colors duration-300 ${
+                  className={`block px-3 py-2 text-text-primary hover:text-primary transition-colors duration-300 rounded-xl ${
                     activeSection === link.id ? 'text-primary font-semibold' : ''
                   }`}
                   whileHover={{ scale: 1.05 }}

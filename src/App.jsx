@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense, useEffect } from 'react'
 import './index.css'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/react"
@@ -132,10 +132,10 @@ function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-[1600px] mx-auto px-4 py-8"
+        className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
       >
-        <header id="home" className="min-h-[calc(100vh-80px)] flex items-center justify-center py-16">
-          <div className="flex flex-col md:flex-row items-center gap-12 max-w-7xl mx-auto px-4">
+        <header id="home" className="min-h-[calc(100vh-80px)] flex items-center justify-center hero-section">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12 max-w-7xl mx-auto">
             <motion.div 
               className="flex-1 text-center md:text-left"
               initial={{ opacity: 0, x: isMobile ? 0 : -100 }}
@@ -143,7 +143,7 @@ function App() {
               transition={{ duration: isMobile ? 0.6 : 0.8 }}
             >
               <motion.h1 
-                className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+                className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -156,10 +156,10 @@ function App() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Senior Software Developer
+                Junior Yazılım Geliştirici
               </motion.p>
               <motion.p 
-                className="text-lg text-text-primary/90 max-w-2xl"
+                className="text-lg text-text-primary/90 max-w-2xl mx-auto md:mx-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -174,34 +174,17 @@ function App() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <div className="relative">
-                {/* Minimalist arka plan */}
+              <div className="relative hero-image">
                 <motion.div 
-                  className="absolute -inset-16 bg-gradient-to-br from-blue-500/10 to-blue-600/10 rounded-[120px]"
-                  animate={{ 
-                    scale: [1, 1.02, 1],
-                  }}
-                  transition={{ 
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
+                  className="absolute -inset-16 rounded-[120px] bg-gradient-to-br from-blue-500/10 to-blue-600/10"
+                  animate={{ scale: [1, 1.02, 1] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 />
-
-                {/* Minimalist çizgiler */}
                 <motion.div 
-                  className="absolute -inset-16 border border-blue-500/10 rounded-[120px]"
-                  animate={{ 
-                    rotate: 360,
-                  }}
-                  transition={{ 
-                    duration: 30,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
+                  className="absolute -inset-16 rounded-[120px] border border-blue-500/10"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
                 />
-
-                {/* Profil resmi container */}
                 <motion.div
                   className="relative z-10"
                   whileHover={{ scale: 1.02 }}
@@ -213,87 +196,51 @@ function App() {
                     loading="lazy"
                     width="300"
                     height="300"
-                    className="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover border-2 border-blue-100/30 shadow-xl"
-                    initial={{ rotate: -5 }}
+                    className="rounded-3xl w-64 h-64 md:w-80 md:h-80 object-cover border border-white/60 shadow-xl"
+                    initial={{ rotate: -2 }}
                     animate={{ rotate: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
                   />
-                  
-                  {/* Minimalist parlaklık */}
                   <motion.div 
-                    className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-50/0 via-blue-50/10 to-blue-50/0"
-                    animate={{ 
-                      rotate: 360
-                    }}
-                    transition={{ 
-                      duration: 10,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
+                    className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-50/0 via-blue-50/10 to-blue-50/0"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                   />
                 </motion.div>
-
-                {/* Minimalist noktalar */}
-                <motion.div 
-                  className="absolute top-0 right-0 w-3 h-3 bg-blue-500/30 rounded-full"
-                  animate={{ 
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.6, 0.3]
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div 
-                  className="absolute bottom-0 left-0 w-3 h-3 bg-blue-600/30 rounded-full"
-                  animate={{ 
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.6, 0.3]
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1.5
-                  }}
-                />
               </div>
             </motion.div>
           </div>
         </header>
 
-        <section id="skills" className="py-20">
+        <section id="skills" className="section">
           <motion.h2 
-            className="text-4xl font-bold text-center mb-12 relative"
+            className="section-title text-center heading-accent"
             variants={fadeInUp}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
           >
             Uzmanlık Alanlarım
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded"></div>
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
-                className="bg-white/5 border border-white/10 rounded-2xl p-8 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/20"
+                className="skill-card p-8"
                 variants={fadeInUp}
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                <div className="w-16 h-16 flex items-center justify-center bg-primary/20 rounded-xl text-primary mb-6">
+                <div className="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-xl text-primary mb-6">
                   {skill.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-4">{skill.name}</h3>
-                <p className="text-gray-800 mb-6">{skill.description}</p>
+                <p className="text-text-secondary mb-6">{skill.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {skill.technologies.map((tech) => (
-                    <span key={tech} className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
+                    <span key={tech} className="chip">
                       {tech}
                     </span>
                   ))}

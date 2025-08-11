@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <motion.section
       id="contact"
-      className="py-20 bg-gradient-to-b from-background to-background-dark"
+      className="section bg-gradient-to-b from-background to-background-dark"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -19,12 +19,10 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-            İletişime Geçin
-          </h2>
+          <h2 className="section-title heading-accent">İletişime Geçin</h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Projeleriniz veya iş birliği fırsatları için benimle iletişime geçebilirsiniz.
-            Size en kısa sürede iletişime gececegim.
+            Size en kısa sürede iletişime geçeceğim.
           </p>
         </motion.div>
 

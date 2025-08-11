@@ -80,13 +80,13 @@ const Projects = () => {
   return (
     <motion.section
       id="projects"
-      className="py-20 bg-gradient-to-b from-background to-background-dark"
+      className="section bg-gradient-to-b from-background to-background-dark"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -94,19 +94,17 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-            Projelerim
-          </h2>
+          <h2 className="section-title heading-accent">Projelerim</h2>
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Geliştirdiğim bazı projeler ve çalışmalarım.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.name}
-              className={`bg-gradient-to-br ${project.color} rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 backdrop-blur-sm`}
+              className={`bg-gradient-to-br ${project.color} rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 backdrop-blur`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -145,7 +143,7 @@ const Projects = () => {
                 {project.tech.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 bg-white/20 backdrop-blur-sm text-text-primary rounded-full text-sm"
+                    className="px-3 py-1 bg-white/60 backdrop-blur text-text-primary rounded-full text-sm"
                   >
                     {tech}
                   </span>

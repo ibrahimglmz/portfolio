@@ -103,21 +103,18 @@ const Experience = () => {
 
   return (
     <motion.section 
-      className="py-20 bg-white"
+      className="section bg-white"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={containerVariants}
     >
-      <div className="max-w-[1600px] mx-auto px-4">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
           variants={titleVariants}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary relative inline-block">
-            Deneyim
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-primary to-secondary rounded"></div>
-          </h2>
+          <h2 className="section-title heading-accent">Deneyim</h2>
         </motion.div>
 
         <div className="relative">
@@ -140,9 +137,9 @@ const Experience = () => {
               onHoverEnd={() => setHoveredIndex(null)}
               onClick={() => setSelectedIndex(selectedIndex === index ? null : index)}
             >
-              <div className={`flex items-center gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+              <div className={`flex items-center gap-6 md:gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                 <motion.div 
-                  className="w-16 h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl z-10 cursor-pointer"
+                  className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl z-10 cursor-pointer border border-white/60"
                   style={{ backgroundColor: experience.color }}
                   animate={{
                     scale: hoveredIndex === index ? 1.2 : 1,
@@ -155,7 +152,7 @@ const Experience = () => {
                 </motion.div>
                 
                 <motion.div 
-                  className={`flex-1 bg-white rounded-xl p-6 shadow-lg cursor-pointer transform transition-all duration-300 ${
+                  className={`flex-1 bg-white rounded-2xl p-6 shadow-lg border border-gray-100 cursor-pointer transform transition-all duration-300 ${
                     selectedIndex === index ? 'scale-105' : ''
                   }`}
                   animate={{
