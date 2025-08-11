@@ -111,9 +111,9 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                <h3 className="text-2xl font-semibold text-text-primary">{project.name}</h3>
-                <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 overflow-x-hidden">
+                <h3 className="text-2xl font-semibold text-text-primary break-words">{project.name}</h3>
+                <div className="flex gap-4 flex-wrap">
                   {project.github && (
                     <a
                       href={project.github}
@@ -138,7 +138,7 @@ const Projects = () => {
                   )}
                 </div>
               </div>
-              <p className="text-text-secondary mb-6">{project.description}</p>
+              <p className="text-text-secondary mb-6 break-words">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
                   <span

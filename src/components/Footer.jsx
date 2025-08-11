@@ -5,16 +5,16 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white/80 backdrop-blur border-t border-gray-100 py-12">
+    <footer className="bg-white/80 backdrop-blur border-t border-gray-100 py-12 overflow-x-hidden">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left break-words">
             <h3 className="text-2xl font-bold text-primary mb-2 tracking-tight">İbrahim Gülmez</h3>
             <p className="text-text-secondary">Junior Yazılım Geliştirici</p>
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-4">
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               <a
                 href="https://linkedin.com/in/ibrahim-gülmez-8bb9501b1"
                 target="_blank"
@@ -38,7 +38,7 @@ const Footer = () => {
                 <FaEnvelope size={20} />
               </a>
             </div>
-            <p className="text-text-secondary text-sm">
+            <p className="text-text-secondary text-sm break-words text-center md:text-right">
               © {currentYear} İbrahim Gülmez. Tüm hakları saklıdır.
             </p>
           </div>

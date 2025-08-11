@@ -142,7 +142,7 @@ const Navbar = () => {
     <motion.nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/70 backdrop-blur-xl shadow-lg' : 'bg-transparent'
-      }`}
+      } overflow-x-hidden`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -163,7 +163,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="tracking-tight">İbrahim Gülmez</span>
+            <span className="tracking-tight whitespace-nowrap">İbrahim Gülmez</span>
           </motion.a>
 
           {/* Desktop Menu */}
@@ -182,7 +182,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {link.text}
+                <span className="whitespace-nowrap">{link.text}</span>
               </motion.a>
             ))}
           </div>
@@ -201,7 +201,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isOpen && (
           <motion.div
-            className="md:hidden"
+            className="md:hidden overflow-x-hidden"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -222,7 +222,7 @@ const Navbar = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {link.text}
+                  <span className="whitespace-nowrap">{link.text}</span>
                 </motion.a>
               ))}
             </div>

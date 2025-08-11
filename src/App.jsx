@@ -1,4 +1,5 @@
 import { useState, lazy, Suspense, useEffect } from 'react'
+import { useReducedMotion } from 'framer-motion'
 import './index.css'
 import { motion } from 'framer-motion'
 import Splash from './components/Splash'
@@ -28,6 +29,7 @@ function App() {
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
   const [isLandscape, setIsLandscape] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
   
   // Ekran boyutunu ve oryantasyonunu algılama
   useEffect(() => {
@@ -141,25 +143,25 @@ function App() {
   }
 
   return (
-    <div className={`min-h-screen w-full ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''} ${isLandscape ? 'landscape' : 'portrait'}`}>
+    <div className={`min-h-screen w-full overflow-x-hidden ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''} ${isLandscape ? 'landscape' : 'portrait'}`}>
       <Splash />
       <Navbar />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
+        className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-x-hidden"
       >
-        <header id="home" className="min-h-[calc(100vh-80px)] flex items-center justify-center hero-section">
-          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12 max-w-7xl mx-auto">
+        <header id="home" className="min-h-[calc(100vh-80px)] flex items-center justify-center hero-section overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12 max-w-7xl mx-auto w-full">
             <motion.div 
-              className="flex-1 text-center md:text-left"
+              className="flex-1 text-center md:text-left px-2 sm:px-0"
               initial={{ opacity: 0, x: isMobile ? 0 : -100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: isMobile ? 0.6 : 0.8 }}
             >
               <motion.h1 
-                className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-tight break-words"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -167,7 +169,7 @@ function App() {
                 İbrahim Gülmez
               </motion.h1>
               <motion.p 
-                className="text-xl md:text-2xl text-primary/80 font-fira mb-4"
+                className="text-lg md:text-2xl text-primary/80 font-fira mb-4 break-words"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -175,7 +177,7 @@ function App() {
                 Junior Yazılım Geliştirici
               </motion.p>
               <motion.p 
-                className="text-lg text-text-primary/90 max-w-2xl mx-auto md:mx-0"
+                className="text-base md:text-lg text-text-primary/90 max-w-2xl mx-auto md:mx-0 break-words"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -185,70 +187,26 @@ function App() {
               </motion.p>
             </motion.div>
             <motion.div 
-              className="flex-1 flex justify-center relative"
+              className="flex-1 flex justify-center relative overflow-visible"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <div className="relative hero-image">
-                <div className="absolute inset-0 -z-10 overflow-visible">
+              <div className="relative hero-image max-w-full">
+                <div className="absolute inset-0 -z-10 pointer-events-none">
                   <motion.div
-                    className="w-40 h-40 bg-primary/30 blur-3xl rounded-full absolute -top-8 -left-8"
-                    animate={{
-                      x: [0, 10, -10, 0],
-                      y: [0, -10, 10, 0],
-                      scale: [1, 1.05, 0.98, 1]
-                    }}
-                    transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] rounded-full"
+                    style={{ width: '22rem', height: '22rem', background: 'radial-gradient(circle, rgba(37,99,235,0.10), transparent 60%)' }}
+                    animate={prefersReducedMotion ? { opacity: 1 } : { rotate: 360 }}
+                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 40, repeat: Infinity, ease: 'linear' }}
                   />
                   <motion.div
-                    className="w-44 h-44 bg-secondary/30 blur-3xl rounded-full absolute bottom-0 -right-6"
-                    animate={{
-                      x: [0, -12, 8, 0],
-                      y: [0, 12, -10, 0],
-                      scale: [1, 0.97, 1.03, 1]
-                    }}
-                    transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
-                  />
-                  <motion.div
-                    className="w-32 h-32 bg-accent/30 blur-3xl rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
-                    animate={{
-                      x: [0, 8, -8, 0],
-                      y: [0, -6, 6, 0],
-                      scale: [1, 1.04, 0.99, 1]
-                    }}
-                    transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 0.6 }}
-                  />
-                  <motion.div
-                    className="absolute -inset-10 rounded-[120px] opacity-30"
-                    style={{
-                      background:
-                        'conic-gradient(from 0deg, rgba(37,99,235,0.25), rgba(56,189,248,0.2), rgba(99,102,241,0.25), rgba(37,99,235,0.25))'
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  />
-                  <motion.div
-                    className="w-2 h-2 rounded-full bg-primary/40 absolute top-3 right-4"
-                    animate={{ y: [0, -6, 0], opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                  <motion.div
-                    className="w-2 h-2 rounded-full bg-secondary/40 absolute bottom-3 left-6"
-                    animate={{ y: [0, 6, 0], opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] rounded-full border border-blue-500/20"
+                    style={{ width: '18rem', height: '18rem' }}
+                    animate={prefersReducedMotion ? { opacity: 1 } : { rotate: -360 }}
+                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 50, repeat: Infinity, ease: 'linear' }}
                   />
                 </div>
-                <motion.div 
-                  className="absolute -inset-16 rounded-[120px] bg-gradient-to-br from-blue-500/10 to-blue-600/10"
-                  animate={{ scale: [1, 1.02, 1] }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.div 
-                  className="absolute -inset-16 rounded-[120px] border border-blue-500/10"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                />
                 <motion.div
                   className="relative z-10"
                   whileHover={{ scale: 1.02 }}
@@ -258,17 +216,13 @@ function App() {
                     src={profileImage}
                     alt="İbrahim Gülmez"
                     loading="lazy"
+                    decoding="async"
                     width="300"
                     height="300"
-                    className="rounded-3xl w-64 h-64 md:w-80 md:h-80 object-cover border border-white/60 shadow-xl"
+                    className="rounded-3xl w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover border border-white/60 shadow-xl max-w-full"
                     initial={{ rotate: -2 }}
                     animate={{ rotate: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                  />
-                  <motion.div 
-                    className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-50/0 via-blue-50/10 to-blue-50/0"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                   />
                 </motion.div>
               </div>

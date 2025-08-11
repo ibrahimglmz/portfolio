@@ -42,20 +42,20 @@ const Splash = () => {
 
           {/* Logo ve İsim */}
           <motion.div
-            className="relative text-center"
+            className="relative text-center max-w-full overflow-hidden px-4"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <div className="text-white text-6xl font-extrabold tracking-tight">
+            <div className="text-white text-4xl sm:text-6xl font-extrabold tracking-tight break-words max-w-full">
               İG
             </div>
-            <div className="mt-3 text-gray-300 text-lg">
+            <div className="mt-3 text-gray-300 text-base sm:text-lg break-words max-w-full">
               İbrahim Gülmez
             </div>
             <motion.div
-              className="mt-1 text-gray-400 text-sm"
+              className="mt-1 text-gray-400 text-xs sm:text-sm break-words max-w-full"
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4 }}

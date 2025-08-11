@@ -117,7 +117,7 @@ const Experience = () => {
           <h2 className="section-title heading-accent">Deneyim</h2>
         </motion.div>
 
-        <div className="relative">
+        <div className="relative overflow-x-hidden">
           <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary/20 to-secondary/20"></div>
           
           {experiences.map((experience, index) => (
@@ -137,7 +137,7 @@ const Experience = () => {
               onHoverEnd={() => setHoveredIndex(null)}
               onClick={() => setSelectedIndex(selectedIndex === index ? null : index)}
             >
-              <div className={`flex items-center gap-6 md:gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+              <div className={`flex items-center gap-6 md:gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} overflow-x-hidden`}>
                 <motion.div 
                   className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl z-10 cursor-pointer border border-white/60"
                   style={{ backgroundColor: experience.color }}
@@ -154,7 +154,7 @@ const Experience = () => {
                 <motion.div 
                   className={`flex-1 bg-white rounded-2xl p-6 shadow-lg border border-gray-100 cursor-pointer transform transition-all duration-300 ${
                     selectedIndex === index ? 'scale-105' : ''
-                  }`}
+                  } break-words`}
                   animate={{
                     boxShadow: hoveredIndex === index 
                       ? '0 10px 30px rgba(0, 0, 0, 0.2)' 

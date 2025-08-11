@@ -16,7 +16,7 @@ const About = () => {
   return (
     <motion.section 
       id="about"
-      className="section bg-white"
+      className="section bg-white overflow-x-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -24,7 +24,7 @@ const About = () => {
     >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2 
-          className="section-title text-center heading-accent"
+          className="section-title text-center heading-accent break-words"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -40,7 +40,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <motion.p className="text-text-secondary leading-relaxed mb-6">
+          <motion.p className="text-text-secondary leading-relaxed mb-6 break-words">
             {firstPart}
           </motion.p>
           
@@ -53,7 +53,7 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="overflow-hidden"
           >
-            <p className="text-text-secondary leading-relaxed whitespace-pre-line">
+            <p className="text-text-secondary leading-relaxed whitespace-pre-line break-words">
               {remainingPart}
             </p>
           </motion.div>
