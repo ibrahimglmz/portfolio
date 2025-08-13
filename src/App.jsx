@@ -186,7 +186,7 @@ function App() {
                 modern teknolojileri kullanan bir bilgisayar programcısı.
               </motion.p>
             </motion.div>
-            <motion.div 
+            <motion.div
               className="flex-1 flex justify-center relative overflow-visible"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -194,17 +194,58 @@ function App() {
             >
               <div className="relative hero-image max-w-full">
                 <div className="absolute inset-0 -z-10 pointer-events-none">
+                  {/* Zarif arka plan tasarımı */}
                   <motion.div
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] rounded-full"
-                    style={{ width: '22rem', height: '22rem', background: 'radial-gradient(circle, rgba(37,99,235,0.10), transparent 60%)' }}
-                    animate={prefersReducedMotion ? { opacity: 1 } : { rotate: 360 }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 40, repeat: Infinity, ease: 'linear' }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform]"
+                    style={{ 
+                      width: '26rem', 
+                      height: '26rem', 
+                      background: 'linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(147,51,234,0.06) 50%, rgba(236,72,153,0.06) 100%)',
+                      borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%'
+                    }}
+                    animate={prefersReducedMotion ? { opacity: 1 } : { 
+                      borderRadius: [
+                        '30% 70% 70% 30% / 30% 30% 70% 70%',
+                        '70% 30% 30% 70% / 70% 70% 30% 30%',
+                        '30% 70% 70% 30% / 30% 30% 70% 70%'
+                      ]
+                    }}
+                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 8, repeat: Infinity, ease: 'easeInOut' }}
                   />
                   <motion.div
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] rounded-full border border-blue-500/20"
-                    style={{ width: '18rem', height: '18rem' }}
-                    animate={prefersReducedMotion ? { opacity: 1 } : { rotate: -360 }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 50, repeat: Infinity, ease: 'linear' }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform]"
+                    style={{ 
+                      width: '20rem', 
+                      height: '20rem',
+                      background: 'linear-gradient(-45deg, rgba(56,189,248,0.05) 0%, rgba(168,85,247,0.05) 50%, rgba(236,72,153,0.05) 100%)',
+                      borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%'
+                    }}
+                    animate={prefersReducedMotion ? { opacity: 1 } : { 
+                      borderRadius: [
+                        '70% 30% 30% 70% / 70% 70% 30% 30%',
+                        '30% 70% 70% 30% / 30% 30% 70% 70%',
+                        '70% 30% 30% 70% / 70% 70% 30% 30%'
+                      ]
+                    }}
+                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+                  />
+                  {/* Subtle accent element */}
+                  <motion.div
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform]"
+                    style={{ 
+                      width: '14rem', 
+                      height: '14rem',
+                      background: 'linear-gradient(90deg, rgba(34,197,94,0.03) 0%, rgba(59,130,246,0.03) 50%, rgba(168,85,247,0.03) 100%)',
+                      borderRadius: '50% 50% 50% 50% / 60% 40% 60% 40%'
+                    }}
+                    animate={prefersReducedMotion ? { opacity: 1 } : { 
+                      borderRadius: [
+                        '50% 50% 50% 50% / 60% 40% 60% 40%',
+                        '40% 60% 40% 60% / 50% 50% 50% 50%',
+                        '50% 50% 50% 50% / 60% 40% 60% 40%'
+                      ]
+                    }}
+                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
                   />
                 </div>
                 <motion.div
@@ -219,7 +260,10 @@ function App() {
                     decoding="async"
                     width="300"
                     height="300"
-                    className="rounded-3xl w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover border border-white/60 shadow-xl max-w-full"
+                    className="w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover border-2 border-white/60 shadow-2xl max-w-full"
+                    style={{
+                      borderRadius: '25% 75% 75% 25% / 25% 25% 75% 75%'
+                    }}
                     initial={{ rotate: -2 }}
                     animate={{ rotate: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}

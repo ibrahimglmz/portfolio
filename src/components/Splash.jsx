@@ -11,7 +11,7 @@ const Splash = () => {
       const timer = setTimeout(() => {
         setVisible(false)
         sessionStorage.setItem('introShown', '1')
-      }, 2200) // toplam gösterim süresi
+      }, 2500) // toplam gösterim süresi
       return () => clearTimeout(timer)
     }
   }, [])
@@ -23,53 +23,152 @@ const Splash = () => {
       {visible && (
         <motion.div
           key="splash"
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-black"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          {/* Arka plan partikül efekti */}
+          {/* Animasyonlu arka plan partikülleri */}
           <motion.div
             className="absolute inset-0"
             style={{
-              background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05), transparent 60%)`,
+              background: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08), transparent 60%)`,
               backgroundSize: '200% 200%'
             }}
             animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
-            transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
           />
 
-          {/* Logo ve İsim */}
-          <motion.div
-            className="relative text-center max-w-full overflow-hidden px-4"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <div className="text-white text-4xl sm:text-6xl font-extrabold tracking-tight break-words max-w-full">
-              İG
-            </div>
-            <div className="mt-3 text-gray-300 text-base sm:text-lg break-words max-w-full">
-              İbrahim Gülmez
-            </div>
+          {/* Floating particles */}
+          {[...Array(6)].map((_, i) => (
             <motion.div
-              className="mt-1 text-gray-400 text-xs sm:text-sm break-words max-w-full"
-              initial={{ opacity: 0, y: 5 }}
+              key={i}
+              className="absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 opacity-60"
+              style={{
+                left: `${20 + i * 15}%`,
+                top: `${30 + i * 10}%`,
+                borderRadius: '50% 50% 50% 50% / 60% 40% 60% 40%'
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, 10, 0],
+                opacity: [0.6, 1, 0.6],
+                scale: [1, 1.2, 1],
+                borderRadius: [
+                  '50% 50% 50% 50% / 60% 40% 60% 40%',
+                  '40% 60% 40% 60% / 50% 50% 50% 50%',
+                  '50% 50% 50% 50% / 60% 40% 60% 40%'
+                ]
+              }}
+              transition={{
+                duration: 3 + i * 0.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+
+          {/* Ana logo ve isim container */}
+          <motion.div
+            className="relative text-center max-w-full overflow-hidden px-4 z-10"
+            initial={{ scale: 0.8, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: -20 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            {/* Logo container with glow effect */}
+            <motion.div
+              className="relative mb-6"
+              initial={{ rotate: -5 }}
+              animate={{ rotate: 5 }}
+              transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+            >
+              <div className="text-white text-5xl sm:text-7xl font-extrabold tracking-tight break-words max-w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent neon-text">
+                İG
+              </div>
+              {/* Glow effect */}
+              <div className="absolute inset-0 text-5xl sm:text-7xl font-extrabold tracking-tight break-words max-w-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent blur-sm opacity-50">
+                İG
+              </div>
+            </motion.div>
+
+            {/* İsim */}
+            <motion.div
+              className="mt-4 text-gray-200 text-lg sm:text-xl break-words max-w-full font-medium"
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.4 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              İbrahim Gülmez
+            </motion.div>
+
+            {/* Rol */}
+            <motion.div
+              className="mt-2 text-gray-400 text-sm sm:text-base break-words max-w-full font-light"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
             >
               Junior Yazılım Geliştirici
             </motion.div>
+
+            {/* Loading dots */}
+            <motion.div
+              className="flex justify-center items-center mt-6 space-x-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400"
+                  style={{ borderRadius: '50% 50% 50% 50% / 60% 40% 60% 40%' }}
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.5, 1, 0.5],
+                    borderRadius: [
+                      '50% 50% 50% 50% / 60% 40% 60% 40%',
+                      '40% 60% 40% 60% / 50% 50% 50% 50%',
+                      '50% 50% 50% 50% / 60% 40% 60% 40%'
+                    ]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: i * 0.2,
+                  }}
+                />
+              ))}
+            </motion.div>
           </motion.div>
 
-          {/* Alt fade çizgisi */}
+          {/* Alt gradient çizgisi */}
           <motion.div
-            className="absolute bottom-20 w-40 h-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: '10rem' }}
-            transition={{ duration: 1, ease: 'easeInOut', delay: 0.4 }}
+            className="absolute bottom-20 w-48 h-[3px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+            style={{ borderRadius: '2px' }}
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: '12rem', opacity: 1 }}
+            transition={{ duration: 1.5, ease: 'easeInOut', delay: 0.6 }}
+          />
+
+          {/* Corner decorations */}
+          <motion.div
+            className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-blue-400/50"
+            style={{ borderRadius: '16px 0 0 0' }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          />
+          <motion.div
+            className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-purple-400/50"
+            style={{ borderRadius: '0 0 16px 0' }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           />
         </motion.div>
       )}
