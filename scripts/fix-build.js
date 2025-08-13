@@ -12,7 +12,7 @@ if (fs.existsSync(notFoundPath)) {
   let notFoundContent = fs.readFileSync(notFoundPath, 'utf8');
   
   // Yolları düzelt
-  notFoundContent = notFoundContent.replace(/href="\.\/"/g, 'href="/my_web/"');
+  notFoundContent = notFoundContent.replace(/href="\.\/"/g, 'href="/portfolio/"');
   
   // 404.html dosyasını güncelle
   fs.writeFileSync(notFoundPath, notFoundContent);

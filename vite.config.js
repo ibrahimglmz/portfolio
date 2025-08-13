@@ -31,7 +31,7 @@ export default defineConfig({
     react(),
     compression()
   ],
-  base: '/my_web/',
+  base: '/portfolio/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
