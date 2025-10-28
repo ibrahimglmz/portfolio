@@ -1,13 +1,14 @@
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { FaLaptopCode, FaUsers, FaRobot, FaRocket, FaGraduationCap } from 'react-icons/fa';
 
 const Experience = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(null);
 
   const experiences = [
+    // Veri yapısı aynı kalır
     {
-      title: "Python Developer İntern",
+      title: "Python Developer Intern",
       company: "New Mind Bilgi Yönetim Sistemleri",
       date: "Eylül 2023 - Eylül 2024",
       details: [
@@ -15,8 +16,8 @@ const Experience = () => {
         "Bilgi yönetim sistemleri üzerinde çalışma",
         "Stajyer olarak profesyonel iş deneyimi"
       ],
-      color: "#6c5ce7",
-      icon: "💻"
+      color: "#6c5ce7", 
+      icon: <FaLaptopCode className="text-white text-xl" />
     },
     {
       title: "GDSC Kulüp Başkan Yardımcısı",
@@ -28,7 +29,7 @@ const Experience = () => {
         "Öğrenci topluluğu liderliği ve koordinasyon"
       ],
       color: "#e17055",
-      icon: "👨‍💻"
+      icon: <FaUsers className="text-white text-xl" />
     },
     {
       title: "T3 AI Volunteer",
@@ -40,7 +41,7 @@ const Experience = () => {
         "AI teknolojileri konusunda deneyim kazanma"
       ],
       color: "#a29bfe",
-      icon: "🤖"
+      icon: <FaRobot className="text-white text-xl" />
     },
     {
       title: "Freelance Yazılım Geliştirici",
@@ -52,31 +53,40 @@ const Experience = () => {
         "Modern teknolojiler ile full-stack geliştirme"
       ],
       color: "#0984e3",
-      icon: "🚀"
+      icon: <FaRocket className="text-white text-xl" />
     },
     {
       title: "Üretken Akademi",
       company: "Online Stajyer",
-      date: "Ocak 2025 - Devam Ediyor",
+      date: "Ocak 2025 - Haziran 2025",
       details: [
         "Üretken Akademi bünyesinde online staj programına katılım",
         "Yazılım geliştirme ve proje yönetimi konularında deneyim"
       ],
       color: "#00b894",
-      icon: "📚"
+      icon: <FaGraduationCap className="text-white text-xl" />
     }
   ].sort((a, b) => {
+    // Tarihe göre sıralama (En yeniden eskiye)
     const getDate = (dateStr) => {
-      const [start] = dateStr.split(' - ');
-      const [month, year] = start.split(' ');
+      const [start, end] = dateStr.split(' - ');
+      const isOngoing = end === 'Devam Ediyor';
+      
+      const datePart = isOngoing ? start : end; 
+      const [month, year] = datePart.split(' ');
+      
       const months = {
         'Ocak': 1, 'Şubat': 2, 'Mart': 3, 'Nisan': 4, 'Mayıs': 5, 'Haziran': 6,
         'Temmuz': 7, 'Ağustos': 8, 'Eylül': 9, 'Ekim': 10, 'Kasım': 11, 'Aralık': 12
       };
-      return new Date(parseInt(year), months[month] - 1);
+
+      if (isOngoing) {
+        return 9999999999999 - new Date(parseInt(year), months[month] - 1).getTime();
+      }
+      return new Date(parseInt(year), months[month] - 1).getTime();
     };
 
-    return getDate(a.date) - getDate(b.date);
+    return getDate(b.date) - getDate(a.date); 
   });
 
   const containerVariants = {
@@ -84,95 +94,83 @@ const Experience = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.3
+        staggerChildren: 0.15
       }
     }
   };
 
-  const titleVariants = {
-    hidden: { opacity: 0, y: -20 },
+  const itemVariants = {
+    hidden: { opacity: 0, x: -50 },
     visible: {
       opacity: 1,
-      y: 0,
+      x: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: "easeOut"
       }
     }
   };
-
+  
   return (
     <motion.section 
-      className="section bg-white"
+      id="experience"
+      className="section py-16 sm:py-24 bg-white text-gray-900" 
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}
     >
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
-          variants={titleVariants}
+          variants={itemVariants}
         >
-          <h2 className="section-title heading-accent">Deneyim</h2>
+          <h2 className="section-title heading-accent">Deneyimlerim</h2>
+          <p className="text-lg text-gray-600">Çalışma ve gönüllü tecrübelerimin listesi.</p>
         </motion.div>
 
-        <div className="relative overflow-x-hidden">
-          <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary/20 to-secondary/20"></div>
-          
+        {/* Basitleştirilmiş Tek Sütunlu Liste */}
+        <div className="space-y-8">
           {experiences.map((experience, index) => (
             <motion.div 
               key={index}
-              className="relative mb-16 last:mb-0"
-              initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.2,
-                type: "spring",
-                stiffness: 100
-              }}
-              viewport={{ once: true }}
-              onHoverStart={() => setHoveredIndex(index)}
-              onHoverEnd={() => setHoveredIndex(null)}
-              onClick={() => setSelectedIndex(selectedIndex === index ? null : index)}
+              className="flex items-start gap-4"
+              variants={itemVariants}
             >
-              <div className={`flex items-center gap-6 md:gap-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'} overflow-x-hidden`}>
-                <motion.div 
-                  className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex items-center justify-center text-2xl z-10 cursor-pointer border border-white/60"
+              
+              {/* İkon ve Dikey Çizgi (Sadeleştirilmiş) */}
+              <div className="flex flex-col items-center pt-2">
+                <div
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-md border-4 border-white flex-shrink-0" 
                   style={{ backgroundColor: experience.color }}
-                  animate={{
-                    scale: hoveredIndex === index ? 1.2 : 1,
-                    boxShadow: hoveredIndex === index 
-                      ? `0 0 30px ${experience.color}80` 
-                      : `0 0 0 3px ${experience.color}40`
-                  }}
                 >
                   {experience.icon}
-                </motion.div>
-                
+                </div>
+                {/* Son kart hariç dikey çizgi */}
+                {index < experiences.length - 1 && (
+                  <div className="w-0.5 h-full bg-gray-200 flex-grow mt-2"></div>
+                )}
+              </div>
+
+              {/* Kart İçeriği */}
+              <motion.div 
+                className="flex-1 min-w-0" // İçerik esnek ve minimum 0 genişliğe sahip
+              >
                 <motion.div 
-                  className={`flex-1 bg-white rounded-2xl p-6 shadow-lg border border-gray-100 cursor-pointer transform transition-all duration-300 ${
-                    selectedIndex === index ? 'scale-105' : ''
-                  } break-words`}
-                  animate={{
-                    boxShadow: hoveredIndex === index 
-                      ? '0 10px 30px rgba(0, 0, 0, 0.2)' 
-                      : '0 5px 15px rgba(0, 0, 0, 0.1)',
-                    y: hoveredIndex === index ? -5 : 0
-                  }}
+                  className={`bg-white p-6 rounded-xl shadow-xl border border-gray-200 cursor-pointer transform transition-all duration-300 w-full ${
+                    selectedIndex === index ? 'border-primary scale-[1.01]' : 'hover:border-primary/50'
+                  }`}
+                  onClick={() => setSelectedIndex(selectedIndex === index ? null : index)}
+                  whileHover={{ y: -2, boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)' }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <motion.h3
-                    className="text-xl font-bold mb-2"
-                    animate={{
-                      color: hoveredIndex === index ? experience.color : '#2d3436'
-                    }}
-                  >
+                  <h3 className="text-2xl font-bold mb-1 text-gray-900 break-words">
                     {experience.title}
-                  </motion.h3>
-                  <h4 className="text-lg text-text-secondary mb-1">{experience.company}</h4>
-                  <p className="text-sm text-text-secondary/80 mb-4">{experience.date}</p>
+                  </h3>
+                  <h4 className="text-md font-medium text-primary/90 mb-2">{experience.company}</h4>
+                  <p className="text-sm text-gray-500 mb-3">{experience.date}</p>
+                  
+                  {/* Detayların Açılıp Kapanması */}
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ 
@@ -182,30 +180,30 @@ const Experience = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 pt-2 border-t border-gray-200 mt-3">
                       {experience.details.map((detail, detailIndex) => (
                         <motion.li 
                           key={detailIndex}
-                          className="text-text-secondary flex items-center gap-2"
-                          initial={{ opacity: 0, x: -20 }}
+                          className="text-gray-700 text-sm flex items-start gap-2"
+                          initial={{ opacity: 0, x: -10 }}
                           animate={{ 
                             opacity: selectedIndex === index ? 1 : 0,
                             x: selectedIndex === index ? 0 : -10
                           }}
                           transition={{ 
-                            delay: detailIndex * 0.1,
+                            delay: selectedIndex === index ? detailIndex * 0.1 : 0,
                             type: "spring",
                             stiffness: 200
                           }}
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                          {detail}
+                          <span className="text-primary mt-1 text-xs">•</span>
+                          <span className='flex-1'>{detail}</span>
                         </motion.li>
                       ))}
                     </ul>
                   </motion.div>
                 </motion.div>
-              </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -214,4 +212,4 @@ const Experience = () => {
   );
 };
 
-export default Experience; 
+export default Experience;

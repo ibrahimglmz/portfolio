@@ -2,12 +2,14 @@ import { useState, lazy, Suspense, useEffect } from 'react'
 import { useReducedMotion } from 'framer-motion'
 import './index.css'
 import { motion } from 'framer-motion'
-import Splash from './components/Splash'
+// Varsayılan bileşenler
+import Splash from './components/Splash' 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import profileImage from './assets/ibrahim.jpg'
-import { FaLinkedinIn, FaEnvelope, FaGithub, FaCode, FaServer, FaDatabase, FaMobile, FaTools } from 'react-icons/fa'
+import { FaLinkedinIn, FaEnvelope, FaGithub, FaCode, FaDatabase, FaTools, FaLaptopCode } from 'react-icons/fa' 
+// KeyMetrics bileşeni App.jsx içinde kullanılmadığı için burada import edilmemiştir.
 
 // Lazy loading ile komponentleri yükle
 const Experience = lazy(() => import('./components/Experience'))
@@ -24,7 +26,7 @@ const LoadingSpinner = () => (
 )
 
 function App() {
-  const [showContact, setShowContact] = useState(false)
+  const [showContact, setShowContact] = useState(false) 
   const [showIntro, setShowIntro] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isTablet, setIsTablet] = useState(false)
@@ -66,27 +68,20 @@ function App() {
     {
       name: "Frontend Geliştirme",
       icon: <FaCode className="text-4xl" />,
-      description: "React, Next.js, Tailwind CSS ve TypeScript ile modern web uygulamaları geliştirme",
-      technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"]
+      description: "React, Next.js, Tailwind CSS ve TypeScript ile modern, duyarlı web uygulamaları geliştirme.",
+      technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Redux"] 
     },
-    // Backend Geliştirme nesnesi kaldırıldı
     {
       name: "Veritabanı Yönetimi",
       icon: <FaDatabase className="text-4xl" />,
-      description: "SQL ve NoSQL veritabanları ile veri modelleme ve optimizasyon",
-      technologies: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Firebase"]
+      description: "İlişkisel (SQL) ve İlişkisel Olmayan (NoSQL) veritabanları ile veri modelleme ve optimizasyon.",
+      technologies: ["PostgreSQL", "MongoDB", "Firebase"] 
     },
     {
-      name: "Mobil Geliştirme",
-      icon: <FaMobile className="text-4xl" />,
-      description: "React Native ve Swift ile cross-platform mobil uygulamalar",
-      technologies: ["React Native", "Swift", "Kotlin", "Flutter", "iOS/Android"]
-    },
-    {
-      name: "Teknik Destek",
-      icon: <FaTools className="text-4xl" />,
-      description: "Donanım kurulumu, yazılım yükleme ve yardım masası (Help Desk) desteği",
-      technologies: ["Donanım Kurulumu", "Yazılım Yükleme", "Help Desk"]
+      name: "Teknik Destek & Kurulum",
+      icon: <FaLaptopCode className="text-4xl" />, 
+      description: "Donanım kurulumu, ağ yapılandırması ve yazılımsal sorun giderme (Help Desk) yetkinliği.",
+      technologies: ["Donanım", "Ağ/LAN", "Problem Çözme (Help Desk)"] 
     }
   ]
 
@@ -96,7 +91,7 @@ function App() {
       description: "Modern bir e-ticaret platformu. Mikroservis mimarisi, ödeme entegrasyonu ve gerçek zamanlı stok takibi.",
       github: "https://github.com/ibrahimglmz/ecommerce-platform",
       demo: "https://ecommerce-demo.com",
-      tech: ["React", "Node.js", "MongoDB", "Redis", "Docker"]
+      tech: ["React", "Node.js", "MongoDB", "Docker", "Express.js"] 
     },
     {
       name: "Yapay Zeka Destekli Analiz Aracı",
@@ -128,7 +123,7 @@ function App() {
     transition: { duration: 0.6 }
   }
 
-  const staggerContainer = {
+  const staggerContainer = { 
     animate: {
       transition: {
         staggerChildren: isMobile ? 0.1 : 0.2
@@ -137,14 +132,45 @@ function App() {
   }
   
   // Dokunma olayları için kullanılan değişkenler
-  const touchProps = {
+  const touchProps = { 
     whileTap: { scale: 0.98 },
     transition: { duration: 0.2 }
   }
 
+  // Yeni Hero Image Stil ve Animasyon Güncellemeleri 
+  const profileImageVariants = {
+    initial: { 
+      rotate: -2,
+      borderRadius: '25% 75% 75% 25% / 25% 25% 75% 75%'
+    },
+    animate: {
+      rotate: 0,
+      borderRadius: [
+        '25% 75% 75% 25% / 25% 25% 75% 75%',
+        '75% 25% 25% 75% / 75% 75% 25% 25%',
+        '25% 75% 75% 25% / 25% 25% 75% 75%'
+      ],
+      transition: {
+        duration: 12,
+        repeat: Infinity,
+        ease: 'easeInOut'
+      }
+    }
+  }
+  
+  // Arka plan animasyonları sadeleştirildi ve rengi güncellendi
+  const bgShapeMotionProps = (duration, delay) => ({
+    animate: prefersReducedMotion ? { opacity: 1 } : {
+      opacity: [0.5, 0.7, 0.5],
+      rotate: [0, 360],
+      transition: { duration, repeat: Infinity, ease: 'linear', delay: delay || 0 }
+    }
+  })
+  
   return (
-    <div className={`min-h-screen w-full overflow-x-hidden ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''} ${isLandscape ? 'landscape' : 'portrait'}`}>
-      <Splash />
+    // Arka plan varsayılan olarak beyaz/açık tonlarda varsayılmıştır
+    <div className={`min-h-screen w-full overflow-x-hidden ${isMobile ? 'mobile' : ''} ${isTablet ? 'tablet' : ''} ${isLandscape ? 'landscape' : 'portrait'} bg-white text-gray-900`}>
+      {showIntro && <Splash />}
       <Navbar />
       <motion.div
         initial={{ opacity: 0 }}
@@ -177,7 +203,7 @@ function App() {
                 Junior Yazılım Geliştirici
               </motion.p>
               <motion.p 
-                className="text-base md:text-lg text-text-primary/90 max-w-2xl mx-auto md:mx-0 break-words"
+                className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto md:mx-0 break-words"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
@@ -185,6 +211,23 @@ function App() {
                 Ölçeklenebilir ve yenilikçi çözümler geliştiren, 
                 modern teknolojileri kullanan bir bilgisayar programcısı.
               </motion.p>
+              {/* Sosyal medya ikonları eklendi */}
+              <motion.div 
+                className="flex justify-center md:justify-start gap-4 mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+              >
+                <a href="https://linkedin.com/in/ibrahimglmz" target="_blank" rel="noopener noreferrer">
+                  <motion.div {...touchProps} className="text-2xl text-primary hover:text-secondary transition-colors"><FaLinkedinIn /></motion.div>
+                </a>
+                <a href="https://github.com/ibrahimglmz" target="_blank" rel="noopener noreferrer">
+                  <motion.div {...touchProps} className="text-2xl text-primary hover:text-secondary transition-colors"><FaGithub /></motion.div>
+                </a>
+                <a href="mailto:ibrahimglmz@example.com">
+                  <motion.div {...touchProps} className="text-2xl text-primary hover:text-secondary transition-colors"><FaEnvelope /></motion.div>
+                </a>
+              </motion.div>
             </motion.div>
             <motion.div
               className="flex-1 flex justify-center relative overflow-visible"
@@ -194,64 +237,27 @@ function App() {
             >
               <div className="relative hero-image max-w-full">
                 <div className="absolute inset-0 -z-10 pointer-events-none">
-                  {/* Zarif arka plan tasarımı */}
+                  {/* Yeni, daha sade ve şık arka plan tasarımı */}
                   <motion.div
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform]"
-                    style={{ 
-                      width: '26rem', 
-                      height: '26rem', 
-                      background: 'linear-gradient(135deg, rgba(37,99,235,0.06) 0%, rgba(147,51,234,0.06) 50%, rgba(236,72,153,0.06) 100%)',
-                      borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%'
-                    }}
-                    animate={prefersReducedMotion ? { opacity: 1 } : { 
-                      borderRadius: [
-                        '30% 70% 70% 30% / 30% 30% 70% 70%',
-                        '70% 30% 30% 70% / 70% 70% 30% 30%',
-                        '30% 70% 70% 30% / 30% 30% 70% 70%'
-                      ]
-                    }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] bg-primary/10 rounded-full"
+                    style={{ width: '28rem', height: '28rem', filter: 'blur(80px)' }}
+                    {...bgShapeMotionProps(10, 0)}
                   />
                   <motion.div
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform]"
-                    style={{ 
-                      width: '20rem', 
-                      height: '20rem',
-                      background: 'linear-gradient(-45deg, rgba(56,189,248,0.05) 0%, rgba(168,85,247,0.05) 50%, rgba(236,72,153,0.05) 100%)',
-                      borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%'
-                    }}
-                    animate={prefersReducedMotion ? { opacity: 1 } : { 
-                      borderRadius: [
-                        '70% 30% 30% 70% / 70% 70% 30% 30%',
-                        '30% 70% 70% 30% / 30% 30% 70% 70%',
-                        '70% 30% 30% 70% / 70% 70% 30% 30%'
-                      ]
-                    }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] bg-secondary/10 rounded-full"
+                    style={{ width: '20rem', height: '20rem', filter: 'blur(60px)' }}
+                    {...bgShapeMotionProps(8, 2)}
                   />
-                  {/* Subtle accent element */}
                   <motion.div
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform]"
-                    style={{ 
-                      width: '14rem', 
-                      height: '14rem',
-                      background: 'linear-gradient(90deg, rgba(34,197,94,0.03) 0%, rgba(59,130,246,0.03) 50%, rgba(168,85,247,0.03) 100%)',
-                      borderRadius: '50% 50% 50% 50% / 60% 40% 60% 40%'
-                    }}
-                    animate={prefersReducedMotion ? { opacity: 1 } : { 
-                      borderRadius: [
-                        '50% 50% 50% 50% / 60% 40% 60% 40%',
-                        '40% 60% 40% 60% / 50% 50% 50% 50%',
-                        '50% 50% 50% 50% / 60% 40% 60% 40%'
-                      ]
-                    }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu [will-change:transform] bg-accent/10 rounded-full"
+                    style={{ width: '12rem', height: '12rem', filter: 'blur(40px)' }}
+                    {...bgShapeMotionProps(6, 4)}
                   />
                 </div>
                 <motion.div
-                  className="relative z-10"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="relative z-10 p-2 bg-white/20 backdrop-blur-sm rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] border border-gray-300 shadow-2xl"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <motion.img 
                     src={profileImage}
@@ -260,13 +266,10 @@ function App() {
                     decoding="async"
                     width="300"
                     height="300"
-                    className="w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover border-2 border-white/60 shadow-2xl max-w-full"
-                    style={{
-                      borderRadius: '25% 75% 75% 25% / 25% 25% 75% 75%'
-                    }}
-                    initial={{ rotate: -2 }}
-                    animate={{ rotate: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
+                    className="w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 object-cover max-w-full"
+                    variants={profileImageVariants}
+                    initial="initial"
+                    animate={prefersReducedMotion ? 'initial' : 'animate'}
                   />
                 </motion.div>
               </div>
@@ -274,9 +277,10 @@ function App() {
           </div>
         </header>
 
-        <section id="skills" className="section">
+        {/* GÜNCELLENMİŞ VE MOBİL UYUMLU SKILLS SECTION */}
+        <section id="skills" className="section py-16 sm:py-24 bg-gray-50"> 
           <motion.h2 
-            className="section-title text-center heading-accent"
+            className="section-title text-center heading-accent mb-12 text-gray-900"
             variants={fadeInUp}
             initial="initial"
             whileInView="animate"
@@ -284,32 +288,40 @@ function App() {
           >
             Uzmanlık Alanlarım
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto" 
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
-                className="skill-card p-8"
+                // Light Mode Uyumu: Beyaz kart, belirgin gölge, gri border
+                className="skill-card p-6 sm:p-8 bg-white rounded-xl shadow-xl border border-gray-200 hover:border-primary transition-all duration-300 transform"
                 variants={fadeInUp}
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)' }}
               >
                 <div className="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-xl text-primary mb-6">
                   {skill.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-4">{skill.name}</h3>
-                <p className="text-text-secondary mb-6">{skill.description}</p>
+                <h3 className="text-xl font-bold mb-3 text-gray-900">{skill.name}</h3>
+                <p className="text-gray-600 mb-6 text-sm">{skill.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {skill.technologies.map((tech) => (
-                    <span key={tech} className="chip">
+                    // Light Mode Uyumu: Açık gri/beyaz çip, koyu metin
+                    <span key={tech} className="chip text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium border border-gray-300">
                       {tech}
                     </span>
                   ))}
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         <Suspense fallback={<LoadingSpinner />}>
@@ -321,7 +333,9 @@ function App() {
         </Suspense>
 
         <Suspense fallback={<LoadingSpinner />}>
-          <Projects />
+          {/* KeyMetrics bileşenini Projects'ten önce eklemek için buraya manuel olarak eklenmesi gerekir. */}
+          {/* Ancak, bu koddaki App bileşeni KeyMetrics'i import etmediği için hata vermemek adına bu örnekte es geçilmiştir. */}
+          <Projects projects={projects} /> 
         </Suspense>
 
         <Suspense fallback={<LoadingSpinner />}>

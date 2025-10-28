@@ -3,6 +3,24 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const Projects = () => {
   const projects = [
+    // YENİ EKLENEN B2B PROJESİ (En üstte)
+    {
+      name: "YDL Yedek Parça - B2B Bayi Portalı",
+      description: "Bayiler arası yedek parça satışını ve envanter yönetimini optimize eden gelişmiş B2B portalı. Stok takibi, hızlı sipariş oluşturma, rol tabanlı yetkilendirme ve detaylı bayi yönetimi paneli içerir.",
+      demo: "https://ydlyedekparca.com.tr", 
+      tech: ["Next.js", "Node.js", "PostgreSQL", "Tailwind CSS"],
+      color: "from-orange-500/10 to-orange-600/10" 
+    },
+    // YENİ KELİME OYUNU PROJESİ (İkinci sırada)
+    {
+      name: "Kelime Tahmin Oyunu",
+      description: "Bu, harfleri tahmin ederek veya tüm kelimeyi tahmin ederek gizli kelimeyi bulmaya çalıştığınız basit bir kelime bulma oyunudur. Klasik adam asmaca (Hangman) mantığıyla çalışır.",
+      github: "https://github.com/ibrahimglmz/kelimeoyunu",
+      demo: "https://kelimeoyunu-inky.vercel.app/", 
+      tech: ["React.js", "JavaScript", "HTML", "CSS", "Vercel"],
+      color: "from-fuchsia-500/10 to-fuchsia-600/10" // Yeni bir renk atandı
+    },
+    // VAR OLAN DİĞER PROJELER
     {
       name: "Galeri İstanbul - Rent a Car & Araba Alım Satım",
       description: "Lüks ve premium araçların alım-satımı ve kiralanması için modern, kullanıcı dostu bir web platformu. Araç galerisi, detaylı ilanlar, iletişim ve hızlı erişim menüleriyle İstanbul’un en prestijli otomotiv galerisi deneyimi sunar.",
@@ -80,7 +98,7 @@ const Projects = () => {
   return (
     <motion.section
       id="projects"
-      className="section bg-gradient-to-b from-background to-background-dark"
+      className="section bg-gradient-to-b from-background to-background-dark py-16 sm:py-24"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -157,4 +175,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;

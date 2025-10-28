@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { FaChevronDown } from 'react-icons/fa' // İkon kullanımı için
 
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -16,68 +17,46 @@ const About = () => {
   return (
     <motion.section 
       id="about"
-      className="section bg-gradient-to-br from-white via-blue-50/30 to-purple-50/30 overflow-x-hidden relative"
+      // Arka plan tamamen beyaz/açık tonlara sadeleştirildi
+      className="section bg-white py-16 sm:py-24 overflow-x-hidden relative"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1 }}
       viewport={{ once: true }}
     >
-      {/* Arka plan dekoratif elementleri */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Arka plan dekoratif elementleri sadeleştirildi ve light moda uyarlandı */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-50">
         <motion.div
-          className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-200/20 to-purple-200/20 blur-3xl"
-          style={{
-            borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%'
-          }}
+          className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 blur-3xl"
+          style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.4, 0.2],
-            borderRadius: [
-              '30% 70% 70% 30% / 30% 30% 70% 70%',
-              '70% 30% 30% 70% / 70% 70% 30% 30%',
-              '30% 70% 70% 30% / 30% 30% 70% 70%'
-            ]
+            rotate: [0, 360],
           }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
         />
         <motion.div
-          className="absolute -bottom-20 -left-20 w-32 h-32 bg-gradient-to-tr from-purple-200/20 to-pink-200/20 blur-3xl"
-          style={{
-            borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%'
-          }}
+          className="absolute -bottom-20 -left-20 w-32 h-32 bg-secondary/10 blur-3xl"
+          style={{ borderRadius: '70% 30% 30% 70% / 70% 70% 30% 30%' }}
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.4, 0.2, 0.4],
-            borderRadius: [
-              '70% 30% 30% 70% / 70% 70% 30% 30%',
-              '30% 70% 70% 30% / 30% 30% 70% 70%',
-              '70% 30% 30% 70% / 70% 70% 30% 30%'
-            ]
+            rotate: [360, 0],
           }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 2,
-          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear', delay: 1 }}
         />
       </div>
 
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.h2 
-          className="section-title text-center heading-accent break-words"
+          className="section-title text-center heading-accent mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Hakkımda
-          </span>
+          <span className="text-gray-900">Hakkımda</span>
         </motion.h2>
 
         <motion.div
@@ -87,15 +66,12 @@ const About = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* Ana kart */}
-          <div className="bg-white/80 backdrop-blur-xl p-8 sm:p-10 shadow-2xl border border-white/50 relative overflow-hidden" style={{ borderRadius: '24px' }}>
-            {/* Kart arka plan dekorasyonu */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/50 opacity-80" style={{ borderRadius: '24px' }} />
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100/30 to-purple-100/30 -translate-y-16 translate-x-16 blur-2xl" style={{ borderRadius: '40% 60% 60% 40% / 40% 40% 60% 60%' }} />
+          {/* Ana kart - Light Mode uyumlu */}
+          <div className="bg-white p-6 sm:p-10 shadow-2xl border border-gray-200 relative" style={{ borderRadius: '20px' }}>
             
             <div className="relative z-10">
               <motion.p 
-                className="text-text-secondary leading-relaxed mb-6 break-words text-lg"
+                className="text-gray-700 leading-relaxed mb-6 break-words text-base sm:text-lg"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -110,62 +86,60 @@ const About = () => {
                   opacity: isExpanded ? 1 : 0,
                   height: isExpanded ? "auto" : 0
                 }}
-                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className="overflow-hidden"
               >
-                <p className="text-text-secondary leading-relaxed whitespace-pre-line break-words text-lg">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-line break-words text-base sm:text-lg mt-4">
                   {remainingPart}
                 </p>
               </motion.div>
 
               <motion.button
-                className="mt-8 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1"
+                className="mt-8 px-6 py-3 w-full sm:w-auto text-white font-semibold shadow-md transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-primary/50"
                 onClick={() => setIsExpanded(!isExpanded)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
                 style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                  borderRadius: '16px'
+                  // Gradient düğme stili
+                  background: 'linear-gradient(90deg, #3b82f6 0%, #a855f7 100%)', // blue-500 to purple-500
+                  borderRadius: '12px',
+                  boxShadow: '0 8px 15px rgba(59, 130, 246, 0.3)',
                 }}
               >
-                <span className="flex items-center space-x-2">
+                <span className="flex items-center justify-center space-x-2">
                   <span>{isExpanded ? "Daha Az Göster" : "Devamını Oku"}</span>
-                  <motion.svg
-                    className="w-5 h-5"
+                  <motion.div
                     animate={{ rotate: isExpanded ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </motion.svg>
+                    <FaChevronDown className="w-4 h-4" />
+                  </motion.div>
                 </span>
               </motion.button>
             </div>
           </div>
 
-          {/* Floating badges */}
+          {/* Floating badges - Daha sade ve küçük hale getirildi, mobil ekranda gizlendi */}
           <motion.div
-            className="absolute -top-4 -right-4 hidden sm:block"
+            className="absolute -top-4 right-8 hidden sm:block"
             initial={{ opacity: 0, scale: 0, rotate: -10 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 text-sm font-medium shadow-lg" style={{ borderRadius: '16px' }}>
+            <div className="bg-gradient-to-r from-primary to-secondary text-white px-3 py-1.5 text-xs font-medium shadow-lg rounded-full">
               🚀 Aktif Geliştirici
             </div>
           </motion.div>
 
           <motion.div
-            className="absolute -bottom-4 -left-4 hidden sm:block"
+            className="absolute -bottom-4 left-8 hidden sm:block"
             initial={{ opacity: 0, scale: 0, rotate: 10 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 text-sm font-medium shadow-lg" style={{ borderRadius: '16px' }}>
+            <div className="bg-gradient-to-r from-secondary to-pink-500 text-white px-3 py-1.5 text-xs font-medium shadow-lg rounded-full">
               💻 Full Stack
             </div>
           </motion.div>
@@ -175,4 +149,4 @@ const About = () => {
   )
 }
 
-export default About 
+export default About
